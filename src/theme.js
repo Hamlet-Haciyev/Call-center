@@ -1,5 +1,22 @@
 import { createTheme } from "@mui/material/styles";
 export const themeSetting = createTheme({
+  components: {
+    MuiInputBase: {
+      styleOverrides: {
+        root: {
+          borderRadius:"8px !important",
+        },
+      },
+    },
+    MuiContainer: {
+      styleOverrides: {
+        root: {
+          paddingLeft: "40px !important",
+          paddingRight: "40px !important",
+        },
+      },
+    },
+  },
   palette: {
     primary: {
       main: "#3949ab",

@@ -1,13 +1,27 @@
 import React, { useState } from "react";
-import { Drawer } from "@mui/material";
+import { useNavigate } from "react-router-dom";
+import {
+  Drawer,
+  List,
+  ListItem,
+  ListItemButton,
+  ListItemIcon,
+  ListItemText,
+  Typography,
+} from "@mui/material";
 import { Box } from "@mui/system";
-import { useTheme } from "@emotion/react";
-const drawerWidth = "250px";
+import { Icon } from "../../assets/icons";
+const drawerWidth = "270px";
 const Sidebar = () => {
+  const navigate = useNavigate(null);
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
-  const theme = useTheme();
+  const [selectedIndex, setSelectedIndex] = useState(0);
+
+  const handleListItemClick = (event, index) => {
+    setSelectedIndex(index);
+  };
   return (
-    <Box component={"nav"}>
+    <>
       {isSidebarOpen ? (
         <Drawer
           open={isSidebarOpen}
@@ -17,17 +31,105 @@ const Sidebar = () => {
           sx={{
             width: drawerWidth,
             "& .MuiDrawer-paper": {
-              color: theme.palette.secondary[200],
-              backgroundColor: theme.palette.background.alt,
               boxSixing: "border-box",
               width: drawerWidth,
+              justifyContent: "space-between",
             },
           }}
         >
-          Sidebar
+          <Box>
+            <Box
+              sx={{
+                display: "flex",
+                justifyContent: "center",
+                padding: "30px 0 40px 0",
+              }}
+            >
+              <Icon name="logo" />
+            </Box>
+            <List>
+              {[
+                {
+                  text: "Müştəri məlumatları",
+                  icon: "userinfo",
+                  to: "/user",
+                },
+                {
+                  text: "Sənədlər",
+                  icon: "document",
+                  to: "/document",
+                },
+                {
+                  text: "Hesabatlıq",
+                  icon: "accountability",
+                  to: "/accountability",
+                },
+                {
+                  text: "Tənzimləmələr",
+                  icon: "setting",
+                  to: "/setting",
+                },
+              ].map(({ text, icon, to }, index) => (
+                <ListItem
+                  key={text}
+                  disablePadding
+                  sx={{
+                    display: "block",
+                    borderLeft:
+                      selectedIndex === index ? "3px solid #ffa300" : "",
+                    mb: "7px",
+                  }}
+                  onClick={() => navigate(`${to}`)}
+                >
+                  <ListItemButton
+                    selected={selectedIndex === index}
+                    onClick={(event) => handleListItemClick(event, index)}
+                    sx={{
+                      minHeight: 48,
+                      justifyContent: isSidebarOpen ? "initial" : "center",
+                      color: selectedIndex === index ? "#FF8200" : "#5F5F5F",
+                      background:
+                        selectedIndex === index ? "#FFFBF3 !important" : "",
+                      padding: "13px 30px",
+                      fontWeight: 600,
+                    }}
+                  >
+                    <ListItemIcon
+                      sx={{
+                        minWidth: 0,
+                        mr: isSidebarOpen ? 2.5 : "auto",
+                        justifyContent: "center",
+                      }}
+                    >
+                      <Icon
+                        name={icon}
+                        color={selectedIndex === index ? "#ffa300" : "#5F5F5F"}
+                      />
+                    </ListItemIcon>
+                    <ListItemText
+                      primary={text}
+                      sx={{ opacity: isSidebarOpen ? 1 : 0 }}
+                    />
+                  </ListItemButton>
+                </ListItem>
+              ))}
+            </List>
+          </Box>
+          <Box>
+            <Typography
+              fontFamily={"Proxima Nova"}
+              textAlign={"center"}
+              color={"#75787B"}
+              variant="body1"
+              component={"p"}
+              paddingBottom={"30px"}
+            >
+              Expresspay © 2013—2022
+            </Typography>
+          </Box>
         </Drawer>
       ) : null}
-    </Box>
+    </>
   );
 };
 

@@ -7,10 +7,11 @@ import {
 } from "react-router-dom";
 import { themeSetting } from "./theme";
 import Layout from "./layout";
-import Terminal from "./container/Terminal";
-import Service from "./container/Service";
-import Customer from "./container/Customer";
+import Document from "./container/Document";
+import Setting from "./container/Setting";
+import User from "./container/User";
 import Login from "./container/Login";
+import Accountability from "./container/Accountability";
 import NotFound from "./container/404NotFound";
 function App() {
   return (
@@ -18,13 +19,14 @@ function App() {
       <ThemeProvider theme={themeSetting}>
         <Routes>
           <Route element={<Layout />}>
-            <Route path="/" element={<Navigate to={"/terminal"} />}></Route>
-            <Route path="/terminal" element={<Terminal />}></Route>
-            <Route path="/service" element={<Service />}></Route>
-            <Route path="/customer" element={<Customer />}></Route>
+            <Route path="/" element={<Navigate to={"/user"} />} />
+            <Route path="/document" element={<Document />} />
+            <Route path="/setting" element={<Setting />} />
+            <Route path="/user" element={<User />} />
+            <Route path="/accountability" element={<Accountability />} />
           </Route>
           <Route path="/login" element={<Login />} />
-          <Route path="*" element={<NotFound />}></Route>
+          <Route path="*" element={<NotFound />} />
         </Routes>
       </ThemeProvider>
     </Router>

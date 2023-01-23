@@ -6,7 +6,7 @@ import { Navbar, Sidebar } from "../components";
 const Layout = () => {
   return (
     <Box sx={{ display: "flex" }}>
-      <Box>
+      <Box >
         <Sidebar />
       </Box>
       <Box sx={{ width: "100%" }}>

@@ -23,6 +23,7 @@ const Navbar = () => {
               sx={{
                 display: { xs: "none", md: "flex" },
                 fontFamily: "Proxima Nova",
+                fontSize:"16px",
                 fontWeight: 400,
                 color: "#5F5F5F",
               }}
@@ -34,6 +35,7 @@ const Navbar = () => {
               sx={{
                 display: { xs: "none", md: "flex" },
                 fontFamily: "Proxima Nova",
+                fontSize:"14px",
                 fontWeight: 400,
                 color: "#75787B",
                 textDecoration: "none",

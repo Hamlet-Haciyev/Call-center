@@ -1,9 +1,9 @@
 import { configureStore } from "@reduxjs/toolkit";
-import { terminalAPI } from "../services/terminals";
+import { settingAPI } from "../services/setting";
 export const store = configureStore({
   reducer: {
-    terminalAPI: terminalAPI.reducer,
+    settingAPI: settingAPI.reducer,
   },
   middleware: (getDefaultMiddleware) =>
-    getDefaultMiddleware().concat(terminalAPI.middleware),
+    getDefaultMiddleware().concat(settingAPI.middleware),
 });
