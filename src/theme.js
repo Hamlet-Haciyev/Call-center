@@ -1,10 +1,18 @@
 import { createTheme } from "@mui/material/styles";
 export const themeSetting = createTheme({
   components: {
-    MuiInputBase: {
+    MuiAppBar: {
       styleOverrides: {
         root: {
-          borderRadius:"8px !important",
+          backgroundColor: "#fff",
+          boxShadow: " 0px 0px 16px 1px rgba(0, 0, 0, 0.05) !important",
+        },
+      },
+    },
+    MuiToolbar: {
+      styleOverrides: {
+        root: {
+          minHeight: "58px !important",
         },
       },
     },

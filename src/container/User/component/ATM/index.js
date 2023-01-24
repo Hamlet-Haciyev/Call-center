@@ -5,7 +5,7 @@ const ATM = () => {
   return (
     <Box
       sx={{
-        width: "400px",
+        width: "360px",
         borderRadius: "12px",
         background: "#fff",
         padding: "22px 30px",

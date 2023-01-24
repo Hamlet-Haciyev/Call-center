@@ -9,10 +9,6 @@ const Navbar = () => {
   return (
     <AppBar
       position="static"
-      style={{
-        backgroundColor: "#fff",
-        boxShadow: " 0px 0px 16px 1px rgba(0, 0, 0, 0.05)",
-      }}
     >
       <Container maxWidth="xl">
         <Toolbar disableGutters sx={{ justifyContent: "space-between" }}>
@@ -23,9 +19,10 @@ const Navbar = () => {
               sx={{
                 display: { xs: "none", md: "flex" },
                 fontFamily: "Proxima Nova",
-                fontSize:"16px",
-                fontWeight: 400,
+                fontSize:"17px",
+                fontWeight: 500,
                 color: "#5F5F5F",
+                mb:"1px"
               }}
             >
               Istifadəçi adı və soyadı
@@ -35,8 +32,7 @@ const Navbar = () => {
               sx={{
                 display: { xs: "none", md: "flex" },
                 fontFamily: "Proxima Nova",
-                fontSize:"14px",
-                fontWeight: 400,
+                fontSize:"15px",
                 color: "#75787B",
                 textDecoration: "none",
               }}
