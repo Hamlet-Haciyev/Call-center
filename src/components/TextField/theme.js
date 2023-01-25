@@ -59,5 +59,14 @@ export const themeTextField = createTheme({
         },
       },
     },
+    MuiInputBase:{
+      styleOverrides:{
+        root:{
+          ".MuiInputBase-inputMultiline":{
+            height:"120px !important"
+          }
+        }
+      }
+    }
   },
 });

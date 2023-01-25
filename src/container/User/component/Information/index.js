@@ -1,20 +1,63 @@
 import React from "react";
-import {
-  Box,
-  Button,
-  Checkbox,
-  FormControl,
-  IconButton,
-  InputAdornment,
-  InputLabel,
-  OutlinedInput,
-  Typography,
-} from "@mui/material";
+import { Box, Button, Checkbox, MenuItem, Typography } from "@mui/material";
 import { Form, Formik } from "formik";
 import { TextField } from "../../../../components";
 import { FormControlLabel } from "../../../../components/FormControl";
-import { Icon } from "../../../../assets/icons";
+import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
+import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
+import { DesktopDatePicker } from "@mui/x-date-pickers";
+import dayjs from "dayjs";
 const Information = () => {
+  const statusCall = [
+    {
+      value: "zənget",
+      label: "Zəng et",
+    },
+    {
+      value: "emailyaz",
+      label: "Email yaz",
+    },
+  ];
+  const filials = [
+    {
+      value: "text1",
+      label: "Text 1",
+    },
+    {
+      value: "text2",
+      label: "Text 2",
+    },
+  ];
+  const medias = [
+    {
+      value: "text1",
+      label: "Text 1",
+    },
+    {
+      value: "text2",
+      label: "Text 2",
+    },
+  ];
+  const serviceCharacters = [
+    {
+      value: "text1",
+      label: "Text 1",
+    },
+    {
+      value: "text2",
+      label: "Text 2",
+    },
+  ];
+  const serviceFields = [
+    {
+      value: "text1",
+      label: "Text 1",
+    },
+    {
+      value: "text2",
+      label: "Text 2",
+    },
+  ];
   return (
     <Box
       sx={{
@@ -26,8 +69,7 @@ const Information = () => {
       }}
     >
       <Typography
-        fontFamily="Proxima Nova"
-        fontWeight={"400"}
+        fontFamily="Regular"
         component={"h2"}
         color="#75787B"
         mb={"20px"}
@@ -46,11 +88,18 @@ const Information = () => {
           identificationphincode: "",
           message: "",
           requiredCall: false,
+          statusCall: "",
           rememberDate: null,
+          birthday: null,
+          callDate: "",
+          filial: "",
+          serviceField: "",
+          serviceCharacter: "",
+          media: "",
         }}
         onSubmit={(values) => alert(JSON.stringify(values, null, 2))}
       >
-        {({ errors, touched, values, handleChange }) => (
+        {({ errors, touched, values, handleChange, setFieldValue }) => (
           <Form>
             <Box display={"flex"} mb={"20px"}>
               <Box flexBasis={"50%"} mr={"40px"}>
@@ -203,57 +252,181 @@ const Information = () => {
                 label="Zəngin vacibliyi"
               />
             </Box>
-            <Box display={"flex"}>
-              <Box flexBasis={"50%"} mr="40px">
-                <TextField
-                  id="rememberDate"
-                  name="rememberDate"
-                  label="Xatirlatma tarixi"
-                  placeholder="dd / mm / yyyy"
-                  value={values.rememberDate}
-                  onChange={handleChange}
-                  fullWidth
-                />
-              </Box>
-              <Box flexBasis={"50%"}>
-                <FormControl sx={{ m: 1, width: "25ch" }} variant="outlined">
-                  <InputLabel htmlFor="rememberDate">
-                    Xatirlatma tarixi
-                  </InputLabel>
-                  <OutlinedInput
-                    id="rememberDate"
-                    name="rememberDate"
-                    endAdornment={
-                      <InputAdornment position="end">
-                        <IconButton edge="end">
-                          <Icon name="document" />
-                        </IconButton>
-                      </InputAdornment>
-                    }
-                    label="Password"
-                  />
-                </FormControl>
-              </Box>
-            </Box>
+            {values.requiredCall ? (
+              <>
+                <Box display={"flex"} mb={"20px"}>
+                  <Box flexBasis={"50%"} mr="40px">
+                    Xatirlatma vaxti
+                  </Box>
+                  <Box flexBasis={"50%"}>
+                    <LocalizationProvider dateAdapter={AdapterDayjs}>
+                      <DesktopDatePicker
+                        id="rememberDate"
+                        name="rememberDate"
+                        label="Xatirlatma tarixi"
+                        inputFormat="DD / MM / YYYY"
+                        value={values.rememberDate}
+                        onChange={(value) =>
+                          setFieldValue("rememberDate", value, true)
+                        }
+                        renderInput={(params) => (
+                          <TextField {...params} fullWidth />
+                        )}
+                      />
+                    </LocalizationProvider>
+                  </Box>
+                </Box>
+                <Box display={"flex"}>
+                  <Box flexBasis={"50%"} mr="40px">
+                    <TextField
+                      id="statusCall"
+                      name="statusCall"
+                      select
+                      label="Status"
+                      fullWidth
+                      value={values.statusCall}
+                      onChange={handleChange}
+                    >
+                      {statusCall.map((option) => (
+                        <MenuItem key={option.value} value={option.value}>
+                          {option.label}
+                        </MenuItem>
+                      ))}
+                    </TextField>
+                  </Box>
+                </Box>
+              </>
+            ) : null}
+
             <Box m={"20px 0"}>
               <Typography
-                fontFamily={"Proxima Nova"}
+                fontFamily={"Regular"}
                 fontSize={"17px"}
                 color={"#75787B"}
                 component="h4"
+                mb={"15px"}
               >
                 Əlavə məlumatlar
               </Typography>
+              <Box display={"flex"} mb={"20px"}>
+                <Box flexBasis={"50%"} mr={"40px"}>
+                  <LocalizationProvider dateAdapter={AdapterDayjs}>
+                    <DesktopDatePicker
+                      id="birthday"
+                      name="birthday"
+                      label="Təvəllüd"
+                      inputFormat="DD / MM / YYYY"
+                      value={values.birthday}
+                      onChange={(value) =>
+                        setFieldValue("birthday", value, true)
+                      }
+                      renderInput={(params) => (
+                        <TextField {...params} fullWidth />
+                      )}
+                    />
+                  </LocalizationProvider>
+                </Box>
+                <Box flexBasis={"50%"}>
+                  <TextField
+                    id="callDate"
+                    name="callDate"
+                    label="Zəng tarixi"
+                    variant="outlined"
+                    value={values.callDate}
+                    onChange={handleChange}
+                    error={touched.callDate && Boolean(errors.callDate)}
+                    helperText={touched.callDate && errors.callDate}
+                    fullWidth
+                  />
+                </Box>
+              </Box>
+              <Box display={"flex"}>
+                <Box flexBasis={"50%"} mr="40px">
+                  <TextField
+                    select
+                    id="filial"
+                    name="filial"
+                    label="Filial"
+                    value={values.filial}
+                    onChange={handleChange}
+                    fullWidth
+                  >
+                    {filials.map((option) => (
+                      <MenuItem key={option.value} value={option.value}>
+                        {option.label}
+                      </MenuItem>
+                    ))}
+                  </TextField>
+                </Box>
+                <Box flexBasis={"50%"}></Box>
+              </Box>
             </Box>
             <Box mb={"20px"}>
               <Typography
-                fontFamily={"Proxima Nova"}
+                fontFamily={"Regular"}
                 fontSize={"17px"}
                 color={"#75787B"}
                 component="h4"
+                mb={"15px"}
               >
                 Maraqlandığı xidmətlər
               </Typography>
+              <Box display={"flex"} mb={"20px"}>
+                <Box flexBasis={"50%"} mr={"40px"}>
+                  <TextField
+                    select
+                    id="serviceField"
+                    name="serviceField"
+                    label="Xidmət  sahəsi"
+                    value={values.serviceField}
+                    onChange={handleChange}
+                    fullWidth
+                  >
+                    {serviceFields.map((option) => (
+                      <MenuItem key={option.value} value={option.value}>
+                        {option.label}
+                      </MenuItem>
+                    ))}
+                  </TextField>
+                </Box>
+                <Box flexBasis={"50%"}>
+                  <TextField
+                    select
+                    id="serviceCharacter"
+                    name="serviceCharacter"
+                    label="Xidmət  xarakteri"
+                    value={values.serviceCharacter}
+                    onChange={handleChange}
+                    fullWidth
+                  >
+                    {serviceCharacters.map((option) => (
+                      <MenuItem key={option.value} value={option.value}>
+                        {option.label}
+                      </MenuItem>
+                    ))}
+                  </TextField>
+                </Box>
+              </Box>
+              <Box display={"flex"}>
+                <Box flexBasis={"50%"} mr="40px">
+                  <TextField
+                    select
+                    id="media"
+                    name="media"
+                    label="Media"
+                    value={values.media}
+                    onChange={handleChange}
+                    fullWidth
+                  >
+                    {medias.map((option) => (
+                      <MenuItem key={option.value} value={option.value}>
+                        {option.label}
+                      </MenuItem>
+                    ))}
+                  </TextField>
+                </Box>
+                <Box flexBasis={"50%"}></Box>
+              </Box>
             </Box>
             <Box
               sx={{
