@@ -1,12 +1,21 @@
 import React from "react";
-import { Box, Button, Checkbox, MenuItem, Typography } from "@mui/material";
+import {
+  Box,
+  Button,
+  Checkbox,
+  FormControl,
+  Grid,
+  MenuItem,
+  Radio,
+  RadioGroup,
+  Typography,
+} from "@mui/material";
 import { Form, Formik } from "formik";
 import { TextField } from "../../../../components";
 import { FormControlLabel } from "../../../../components/FormControl";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { DesktopDatePicker } from "@mui/x-date-pickers";
-import dayjs from "dayjs";
 const Information = () => {
   const statusCall = [
     {
@@ -61,18 +70,16 @@ const Information = () => {
   return (
     <Box
       sx={{
-        width: "770px",
-        borderRadius: "12px",
         background: "#fff",
-        padding: "22px 28px",
-        mr: "25px",
+        borderRadius: "12px",
+        padding: "27px 25px",
       }}
     >
       <Typography
         fontFamily="Regular"
         component={"h2"}
         color="#75787B"
-        mb={"20px"}
+        mb={"18px"}
       >
         Məlumatlar
       </Typography>
@@ -93,16 +100,18 @@ const Information = () => {
           birthday: null,
           callDate: "",
           filial: "",
+          gender: "",
           serviceField: "",
           serviceCharacter: "",
           media: "",
+          interestType: "",
         }}
         onSubmit={(values) => alert(JSON.stringify(values, null, 2))}
       >
         {({ errors, touched, values, handleChange, setFieldValue }) => (
           <Form>
-            <Box display={"flex"} mb={"20px"}>
-              <Box flexBasis={"50%"} mr={"40px"}>
+            <Grid container rowSpacing={2} justifyContent={"space-between"}>
+              <Grid item sm={12} md={6} width={"335px"}>
                 <TextField
                   id="firstname"
                   name="firstname"
@@ -114,8 +123,8 @@ const Information = () => {
                   helperText={touched.firstname && errors.firstname}
                   fullWidth
                 />
-              </Box>
-              <Box flexBasis={"50%"}>
+              </Grid>
+              <Grid item sm={12} md={6} width={"335px"}>
                 <TextField
                   id="lastname"
                   name="lastname"
@@ -127,10 +136,8 @@ const Information = () => {
                   helperText={touched.lastname && errors.lastname}
                   fullWidth
                 />
-              </Box>
-            </Box>
-            <Box display={"flex"} mb="20px">
-              <Box flexBasis={"50%"} mr={"40px"}>
+              </Grid>
+              <Grid item sm={12} md={6} width={"335px"}>
                 <TextField
                   id="fathername"
                   name="fathername"
@@ -142,8 +149,8 @@ const Information = () => {
                   helperText={touched.fathername && errors.fathername}
                   fullWidth
                 />
-              </Box>
-              <Box flexBasis={"50%"}>
+              </Grid>
+              <Grid item sm={12} md={6} width={"335px"}>
                 <TextField
                   id="phonenumber"
                   name="phonenumber"
@@ -155,10 +162,8 @@ const Information = () => {
                   helperText={touched.phonenumber && errors.phonenumber}
                   fullWidth
                 />
-              </Box>
-            </Box>
-            <Box display={"flex"} mb={"20px"}>
-              <Box flexBasis={"50%"} mr={"40px"}>
+              </Grid>
+              <Grid item sm={12} md={6} width={"335px"}>
                 <TextField
                   id="identificationserienumber"
                   name="identificationserienumber"
@@ -176,8 +181,8 @@ const Information = () => {
                   }
                   fullWidth
                 />
-              </Box>
-              <Box flexBasis={"50%"}>
+              </Grid>
+              <Grid item sm={12} md={6} width={"335px"}>
                 <TextField
                   id="companyname"
                   name="companyname"
@@ -189,10 +194,8 @@ const Information = () => {
                   helperText={touched.companyname && errors.companyname}
                   fullWidth
                 />
-              </Box>
-            </Box>
-            <Box display={"flex"} mb={"20px"}>
-              <Box flexBasis={"50%"} mr={"40px"}>
+              </Grid>
+              <Grid item sm={12} md={6} width={"335px"}>
                 <TextField
                   id="salary"
                   name="salary"
@@ -204,8 +207,8 @@ const Information = () => {
                   helperText={touched.salary && errors.salary}
                   fullWidth
                 />
-              </Box>
-              <Box flexBasis={"50%"}>
+              </Grid>
+              <Grid item sm={12} md={6} width={"335px"}>
                 <TextField
                   id="identificationphincode"
                   name="identificationphincode"
@@ -223,42 +226,40 @@ const Information = () => {
                   }
                   fullWidth
                 />
-              </Box>
-            </Box>
-            <Box display={"flex"} mb={"10px"}>
-              <TextField
-                multiline
-                id="message"
-                name="message"
-                label="Qeydlər..."
-                variant="outlined"
-                value={values.message}
-                onChange={handleChange}
-                error={touched.message && Boolean(errors.message)}
-                helperText={touched.message && errors.message}
-                fullWidth
-              />
-            </Box>
-            <Box mb={"10px"}>
-              <FormControlLabel
-                control={
-                  <Checkbox
-                    id="requiredCall"
-                    name="requiredCall"
-                    value={values.requiredCall}
-                    onChange={handleChange}
-                  />
-                }
-                label="Zəngin vacibliyi"
-              />
-            </Box>
-            {values.requiredCall ? (
-              <>
-                <Box display={"flex"} mb={"20px"}>
-                  <Box flexBasis={"50%"} mr="40px">
+              </Grid>
+              <Grid item sm={12} md={12} width={"100%"}>
+                <TextField
+                  multiline
+                  id="message"
+                  name="message"
+                  label="Qeydlər..."
+                  variant="outlined"
+                  value={values.message}
+                  onChange={handleChange}
+                  error={touched.message && Boolean(errors.message)}
+                  helperText={touched.message && errors.message}
+                  fullWidth
+                />
+              </Grid>
+              <Grid item sm={12} md={12} width={"100%"}>
+                <FormControlLabel
+                  control={
+                    <Checkbox
+                      id="requiredCall"
+                      name="requiredCall"
+                      value={values.requiredCall}
+                      onChange={handleChange}
+                    />
+                  }
+                  label="Zəngin vacibliyi"
+                />
+              </Grid>
+              {values.requiredCall ? (
+                <>
+                  <Grid item sm={12} md={6} width={"335px"}>
                     Xatirlatma vaxti
-                  </Box>
-                  <Box flexBasis={"50%"}>
+                  </Grid>
+                  <Grid item sm={12} md={6} width={"335px"}>
                     <LocalizationProvider dateAdapter={AdapterDayjs}>
                       <DesktopDatePicker
                         id="rememberDate"
@@ -274,10 +275,8 @@ const Information = () => {
                         )}
                       />
                     </LocalizationProvider>
-                  </Box>
-                </Box>
-                <Box display={"flex"}>
-                  <Box flexBasis={"50%"} mr="40px">
+                  </Grid>
+                  <Grid item sm={12} md={6} width={"335px"}>
                     <TextField
                       id="statusCall"
                       name="statusCall"
@@ -293,165 +292,189 @@ const Information = () => {
                         </MenuItem>
                       ))}
                     </TextField>
-                  </Box>
-                </Box>
-              </>
-            ) : null}
-
-            <Box m={"20px 0"}>
-              <Typography
-                fontFamily={"Regular"}
-                fontSize={"17px"}
-                color={"#75787B"}
-                component="h4"
-                mb={"15px"}
-              >
-                Əlavə məlumatlar
-              </Typography>
-              <Box display={"flex"} mb={"20px"}>
-                <Box flexBasis={"50%"} mr={"40px"}>
-                  <LocalizationProvider dateAdapter={AdapterDayjs}>
-                    <DesktopDatePicker
-                      id="birthday"
-                      name="birthday"
-                      label="Təvəllüd"
-                      inputFormat="DD / MM / YYYY"
-                      value={values.birthday}
-                      onChange={(value) =>
-                        setFieldValue("birthday", value, true)
-                      }
-                      renderInput={(params) => (
-                        <TextField {...params} fullWidth />
-                      )}
-                    />
-                  </LocalizationProvider>
-                </Box>
-                <Box flexBasis={"50%"}>
-                  <TextField
-                    id="callDate"
-                    name="callDate"
-                    label="Zəng tarixi"
-                    variant="outlined"
-                    value={values.callDate}
-                    onChange={handleChange}
-                    error={touched.callDate && Boolean(errors.callDate)}
-                    helperText={touched.callDate && errors.callDate}
-                    fullWidth
+                  </Grid>
+                </>
+              ) : null}
+              <Grid item sm={12} md={12} width={"100%"}>
+                <Typography
+                  fontFamily={"Regular"}
+                  fontSize={"17px"}
+                  color={"#75787B"}
+                  component="h4"
+                >
+                  Əlavə məlumatlar
+                </Typography>
+              </Grid>
+              <Grid item sm={12} md={6} width={"335px"}>
+                <LocalizationProvider dateAdapter={AdapterDayjs}>
+                  <DesktopDatePicker
+                    id="birthday"
+                    name="birthday"
+                    label="Təvəllüd"
+                    inputFormat="DD / MM / YYYY"
+                    value={values.birthday}
+                    onChange={(value) => setFieldValue("birthday", value, true)}
+                    renderInput={(params) => (
+                      <TextField {...params} fullWidth />
+                    )}
                   />
-                </Box>
-              </Box>
-              <Box display={"flex"}>
-                <Box flexBasis={"50%"} mr="40px">
-                  <TextField
-                    select
-                    id="filial"
-                    name="filial"
-                    label="Filial"
-                    value={values.filial}
+                </LocalizationProvider>
+              </Grid>
+              <Grid item sm={12} md={6} width={"335px"}>
+                <TextField
+                  id="callDate"
+                  name="callDate"
+                  label="Zəng tarixi"
+                  variant="outlined"
+                  value={values.callDate}
+                  onChange={handleChange}
+                  error={touched.callDate && Boolean(errors.callDate)}
+                  helperText={touched.callDate && errors.callDate}
+                  fullWidth
+                />
+              </Grid>
+              <Grid item sm={12} md={6} width={"335px"}>
+                <TextField
+                  select
+                  id="filial"
+                  name="filial"
+                  label="Filial"
+                  value={values.filial}
+                  onChange={handleChange}
+                  fullWidth
+                >
+                  {filials.map((option) => (
+                    <MenuItem key={option.value} value={option.value}>
+                      {option.label}
+                    </MenuItem>
+                  ))}
+                </TextField>
+              </Grid>
+              <Grid item sm={12} md={6} width={"335px"}>
+                <FormControl>
+                  <RadioGroup
+                    aria-labelledby="gender"
+                    name="gender"
+                    row={true}
+                    value={values.gender}
                     onChange={handleChange}
-                    fullWidth
                   >
-                    {filials.map((option) => (
-                      <MenuItem key={option.value} value={option.value}>
-                        {option.label}
-                      </MenuItem>
-                    ))}
-                  </TextField>
-                </Box>
-                <Box flexBasis={"50%"}></Box>
-              </Box>
-            </Box>
-            <Box mb={"20px"}>
-              <Typography
-                fontFamily={"Regular"}
-                fontSize={"17px"}
-                color={"#75787B"}
-                component="h4"
-                mb={"15px"}
-              >
-                Maraqlandığı xidmətlər
-              </Typography>
-              <Box display={"flex"} mb={"20px"}>
-                <Box flexBasis={"50%"} mr={"40px"}>
-                  <TextField
-                    select
-                    id="serviceField"
-                    name="serviceField"
-                    label="Xidmət  sahəsi"
-                    value={values.serviceField}
+                    <FormControlLabel
+                      value="female"
+                      control={<Radio style={{ borderColor: "#ffa300" }} />}
+                      label="Qadın"
+                    />
+                    <FormControlLabel
+                      value="male"
+                      control={<Radio />}
+                      label="Kişi"
+                    />
+                  </RadioGroup>
+                </FormControl>
+              </Grid>
+              <Grid item sm={12} md={12} width={"100%"}>
+                <Typography
+                  fontFamily={"Regular"}
+                  fontSize={"17px"}
+                  color={"#75787B"}
+                  component="h4"
+                >
+                  Maraqlandığı xidmətlər
+                </Typography>
+              </Grid>
+              <Grid item sm={12} md={6} width={"335px"}>
+                <TextField
+                  select
+                  id="serviceField"
+                  name="serviceField"
+                  label="Xidmət  sahəsi"
+                  value={values.serviceField}
+                  onChange={handleChange}
+                  fullWidth
+                >
+                  {serviceFields.map((option) => (
+                    <MenuItem key={option.value} value={option.value}>
+                      {option.label}
+                    </MenuItem>
+                  ))}
+                </TextField>
+              </Grid>
+              <Grid item sm={12} md={6} width={"335px"}>
+                <TextField
+                  select
+                  id="serviceCharacter"
+                  name="serviceCharacter"
+                  label="Xidmət  xarakteri"
+                  value={values.serviceCharacter}
+                  onChange={handleChange}
+                  fullWidth
+                >
+                  {serviceCharacters.map((option) => (
+                    <MenuItem key={option.value} value={option.value}>
+                      {option.label}
+                    </MenuItem>
+                  ))}
+                </TextField>
+              </Grid>
+              <Grid item sm={12} md={6} width={"335px"}>
+                <TextField
+                  select
+                  id="media"
+                  name="media"
+                  label="Media"
+                  value={values.media}
+                  onChange={handleChange}
+                  fullWidth
+                >
+                  {medias.map((option) => (
+                    <MenuItem key={option.value} value={option.value}>
+                      {option.label}
+                    </MenuItem>
+                  ))}
+                </TextField>
+              </Grid>
+              <Grid item sm={12} md={6} width={"335px"}>
+                <FormControl>
+                  <RadioGroup
+                    aria-labelledby="interestType"
+                    name="interestType"
+                    row={true}
+                    value={values.interestType}
                     onChange={handleChange}
-                    fullWidth
                   >
-                    {serviceFields.map((option) => (
-                      <MenuItem key={option.value} value={option.value}>
-                        {option.label}
-                      </MenuItem>
-                    ))}
-                  </TextField>
-                </Box>
-                <Box flexBasis={"50%"}>
-                  <TextField
-                    select
-                    id="serviceCharacter"
-                    name="serviceCharacter"
-                    label="Xidmət  xarakteri"
-                    value={values.serviceCharacter}
-                    onChange={handleChange}
-                    fullWidth
-                  >
-                    {serviceCharacters.map((option) => (
-                      <MenuItem key={option.value} value={option.value}>
-                        {option.label}
-                      </MenuItem>
-                    ))}
-                  </TextField>
-                </Box>
-              </Box>
-              <Box display={"flex"}>
-                <Box flexBasis={"50%"} mr="40px">
-                  <TextField
-                    select
-                    id="media"
-                    name="media"
-                    label="Media"
-                    value={values.media}
-                    onChange={handleChange}
-                    fullWidth
-                  >
-                    {medias.map((option) => (
-                      <MenuItem key={option.value} value={option.value}>
-                        {option.label}
-                      </MenuItem>
-                    ))}
-                  </TextField>
-                </Box>
-                <Box flexBasis={"50%"}></Box>
-              </Box>
-            </Box>
-            <Box
-              sx={{
-                display: "flex",
-                justifyContent: "flex-end",
-              }}
-            >
-              <Button
-                variant={"outlined"}
-                type="submit"
-                style={{
-                  fontFamily: "Proxima Nova",
-                  fontSize: "16px",
-                  backgroundColor: "#FFB500",
-                  padding: "5px 30px",
-                  border: "none",
-                  color: "#fff",
-                  textTransform: "capitalize",
-                  borderRadius: "38px",
-                  width: "140px",
-                }}
-              >
-                Daxil Et
-              </Button>
-            </Box>
+                    <FormControlLabel
+                      value="info"
+                      control={<Radio style={{ borderColor: "#ffa300" }} />}
+                      label="Info"
+                    />
+                    <FormControlLabel
+                      value="problem"
+                      control={<Radio />}
+                      label="Problem"
+                    />
+                  </RadioGroup>
+                </FormControl>
+              </Grid>
+              <Grid item sm={12} md={6} flex={1} textAlign={"end"}>
+                <Button
+                  variant={"outlined"}
+                  type="submit"
+                  style={{
+                    fontFamily: "Proxima Nova",
+                    fontSize: "16px",
+                    backgroundColor: "#FFB500",
+                    padding: "5px 30px",
+                    border: "none",
+                    color: "#fff",
+                    textTransform: "capitalize",
+                    borderRadius: "38px",
+                    width: "150px",
+                  }}
+                >
+                  Daxil Et
+                </Button>
+              </Grid>
+            </Grid>
           </Form>
         )}
       </Formik>

@@ -42,7 +42,7 @@ const Sidebar = () => {
               sx={{
                 display: "flex",
                 justifyContent: "center",
-                padding: "30px 0 40px 0",
+                padding: "28px 0 40px 0",
               }}
             >
               <Icon name="logo" />
@@ -76,7 +76,7 @@ const Sidebar = () => {
                   sx={{
                     display: "block",
                     borderLeft:
-                      selectedIndex === index ? "3px solid #ffa300" : "",
+                      selectedIndex === index ? "3px solid #ffa300" : "3px solid transparent",
                     mb: "7px",
                   }}
                   onClick={() => navigate(`${to}`)}
@@ -90,8 +90,7 @@ const Sidebar = () => {
                       color: selectedIndex === index ? "#FF8200" : "#5F5F5F",
                       background:
                         selectedIndex === index ? "#FFFBF3 !important" : "",
-                      padding: "13px 30px",
-                      fontWeight: 600,
+                      padding: "13px 29px",
                     }}
                   >
                     <ListItemIcon
@@ -107,6 +106,9 @@ const Sidebar = () => {
                       />
                     </ListItemIcon>
                     <ListItemText
+                      style={{
+                        fontFamily: "Semibold !important",
+                      }}
                       primary={text}
                       sx={{ opacity: isSidebarOpen ? 1 : 0 }}
                     />

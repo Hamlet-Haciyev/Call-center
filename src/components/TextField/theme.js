@@ -14,6 +14,7 @@ export const themeTextField = createTheme({
     MuiInputLabel: {
       styleOverrides: {
         root: {
+          fontFamily: "Regular",
           left: "5px",
           top: "-4px",
           color: "#75787B",

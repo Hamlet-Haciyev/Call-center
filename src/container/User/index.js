@@ -1,16 +1,32 @@
 import React from "react";
-import { Container } from "@mui/material";
+import { createTheme, Grid, ThemeProvider } from "@mui/material";
 import { Box } from "@mui/system";
 import Information from "./component/Information";
 import ATM from "./component/ATM";
 const User = () => {
+  const breakPoints = createTheme({
+    breakpoints: {
+      values: {
+        laptop: 1200,
+        tablet: 640,
+        mobile: 0,
+        desktop: 1280,
+      },
+    },
+  });
   return (
-    <Container maxWidth="xl" style={{ background: "#F5F5F5" }}>
-      <Box sx={{ display: "flex", padding: "35px 0" }}>
-        <Information />
-        <ATM />
+    <ThemeProvider theme={breakPoints}>
+      <Box sx={{ backgroundColor: "#f5f5f5", p: "36px 42px 36px 42px" }}>
+        <Grid container spacing={3}>
+          <Grid item mobile={12} tablet={8} desktop={8}>
+            <Information />
+          </Grid>
+          <Grid item mobile={12} tablet={4} desktop={4}>
+            <ATM />
+          </Grid>
+        </Grid>
       </Box>
-    </Container>
+    </ThemeProvider>
   );
 };
 

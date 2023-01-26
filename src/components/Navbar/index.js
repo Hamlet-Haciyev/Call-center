@@ -18,7 +18,7 @@ const Navbar = () => {
               component="h6"
               sx={{
                 display: { xs: "none", md: "flex" },
-                fontFamily: "Proxima Nova",
+                fontFamily: "Regular",
                 fontSize:"17px",
                 fontWeight: 500,
                 color: "#5F5F5F",
@@ -31,7 +31,7 @@ const Navbar = () => {
               component="p"
               sx={{
                 display: { xs: "none", md: "flex" },
-                fontFamily: "Proxima Nova",
+                fontFamily: "Regular",
                 fontSize:"15px",
                 color: "#75787B",
                 textDecoration: "none",

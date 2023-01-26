@@ -19,8 +19,18 @@ export const themeSetting = createTheme({
     MuiContainer: {
       styleOverrides: {
         root: {
-          paddingLeft: "40px !important",
-          paddingRight: "40px !important",
+          paddingLeft: "42px !important",
+          paddingRight: "42px !important",
+        },
+      },
+    },
+    MuiListItemText: {
+      styleOverrides: {
+        root: {
+          "& span": {
+            fontFamily: "Semibold",
+            fontSize: "1.02rem",
+          },
         },
       },
     },
