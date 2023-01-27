@@ -64,7 +64,7 @@ export const themeTextField = createTheme({
       styleOverrides:{
         root:{
           ".MuiInputBase-inputMultiline":{
-            height:"120px !important"
+            height:"70px !important"
           }
         }
       }

@@ -2,7 +2,7 @@ import React from "react";
 import { createTheme, Grid, ThemeProvider } from "@mui/material";
 import { Box } from "@mui/system";
 import Information from "./component/Information";
-import ATM from "./component/ATM";
+import SelectAction from "./component/SelectAction";
 const User = () => {
   const breakPoints = createTheme({
     breakpoints: {
@@ -22,7 +22,7 @@ const User = () => {
             <Information />
           </Grid>
           <Grid item mobile={12} tablet={4} desktop={4}>
-            <ATM />
+            <SelectAction />
           </Grid>
         </Grid>
       </Box>

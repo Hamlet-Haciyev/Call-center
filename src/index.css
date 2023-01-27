@@ -32,6 +32,10 @@ body,
 ::-webkit-scrollbar {
   width: 10px;
 }
+*::selection {
+  background-color: #ffa300;
+  color: #fff;
+}
 
 /* Track */
 ::-webkit-scrollbar-track {

@@ -455,7 +455,7 @@ const Information = () => {
                   </RadioGroup>
                 </FormControl>
               </Grid>
-              <Grid item sm={12} md={6} flex={1} textAlign={"end"}>
+              <Grid item sm={12} md={6} width={"100%"} textAlign={"end"}>
                 <Button
                   variant={"outlined"}
                   type="submit"
