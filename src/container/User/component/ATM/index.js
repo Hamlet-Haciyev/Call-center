@@ -1,8 +1,16 @@
 import React from "react";
-import { Box, Button, Grid, MenuItem, Typography } from "@mui/material";
+import {
+  Box,
+  Button,
+  FormControl,
+  Grid,
+  InputLabel,
+  MenuItem,
+  Select,
+  Typography,
+} from "@mui/material";
 import { Form, Formik } from "formik";
 import { TextField } from "../../../../components";
-import CurrencyInput from "../../../../components/Input";
 
 const ATM = () => {
   const paymentTypes = [
@@ -131,21 +139,60 @@ const ATM = () => {
               />
             </Grid>
             <Grid item width={"100%^"}>
-              {/* <CurrencyInput
-                selectId={"currency"}
-                selectName="currency"
-                selectValue={values.selectValue}
-                selectChange={(values) =>
-                  setFieldValue("currency", values.currency, true)
-                }
-                options={currencyOptions}
-                id={"amount"}
-                name={"amount"}
-                value={values.amount}
-                handleChange={(values) =>
-                  setFieldValue("amount", values.amount, true)
-                }
-              /> */}
+              <div
+                style={{
+                  position: "relative",
+                  border: "2px solid #B1B3B3",
+                  borderRadius: "8px",
+                  overflow: "hidden",
+                }}
+              >
+                <TextField
+                  select
+                  id="currency"
+                  name="currency"
+                  value={values.currency}
+                  onChange={handleChange}
+                  defaultValue={currencyOptions[0].value}
+                  style={{
+                    width: "100px",
+                    position: "absolute",
+                  }}
+                >
+                  {currencyOptions.map((option) => (
+                    <MenuItem key={option.value} value={option.value}>
+                      {option.label}
+                    </MenuItem>
+                  ))}
+                </TextField>
+                <input
+                  id="amount"
+                  name="amount"
+                  value={values.amount}
+                  onChange={handleChange}
+                  style={{
+                    display: "inline-block",
+                    border: "none",
+                    outline: "none",
+                    padding: "12px",
+                    color: "#75787B",
+                    paddingLeft: "110px",
+                    paddingRight: "30px",
+                  }}
+                />
+                {/* <TextField
+                  id="amount"
+                  name="amount"
+                  label="Məbləğ"
+                  variant="outlined"
+                  value={values.amount}
+                  onChange={handleChange}
+                  error={touched.amount && Boolean(errors.amount)}
+                  helperText={touched.amount && errors.amount}
+                  style={{ border: "none" }}
+                  fullWidth
+                /> */}
+              </div>
             </Grid>
           </Grid>
           <Button
@@ -173,3 +220,5 @@ const ATM = () => {
 };
 
 export default ATM;
+//  https://codepen.io/jhawthorn/pen/qrPrXV (currency input)
+//  https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/time
