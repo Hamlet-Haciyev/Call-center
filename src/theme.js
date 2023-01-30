@@ -29,7 +29,7 @@ export const themeSetting = createTheme({
         root: {
           "& span": {
             fontFamily: "Semibold",
-            fontSize: "1.02rem",
+            fontSize: "1.05rem",
           },
         },
       },

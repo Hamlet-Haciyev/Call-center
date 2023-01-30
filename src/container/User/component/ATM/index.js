@@ -1,7 +1,6 @@
 import React from "react";
 import {
   Box,
-  Button,
   FormControl,
   Grid,
   InputLabel,
@@ -10,7 +9,8 @@ import {
   Typography,
 } from "@mui/material";
 import { Form, Formik } from "formik";
-import { TextField } from "../../../../components";
+import { TextField, Button } from "../../../../components";
+import CurrencyInput from "../../../../components/CurrencyInput";
 
 const ATM = () => {
   const paymentTypes = [
@@ -19,10 +19,11 @@ const ATM = () => {
     { label: "SMS Banking", value: "SMS Banking" },
     { label: "3D Secure", value: "3D Secure " },
   ];
-  const currencyOptions = [
-    { label: "USD", value: "usd" },
-    { label: "AZN", value: "azn" },
-    { label: "TR", value: "tr" },
+  const cardTypes = [
+    { label: "Business card", value: "businesscard" },
+    { label: "Expresscard", value: "expresscard" },
+    { label: "Expresso", value: "expresso" },
+    { label: "Maestro", value: "maestro " },
   ];
   return (
     <Formik
@@ -35,10 +36,10 @@ const ATM = () => {
         phoneNumber: "",
         date: "",
         time: "",
-        currency: "",
+        currency: "azn",
         amount: "",
-        company: "",
         terminalNumber: "",
+        belongTerminal: "",
         cardNumber: "",
         cardType: "",
         belongCard: "",
@@ -129,7 +130,8 @@ const ATM = () => {
               <TextField
                 id="phoneNumber"
                 name="phoneNumber"
-                label="(+__) __ ___ __ __"
+                label="Number"
+                placeholder="(+__) __ ___ __ __"
                 variant="outlined"
                 value={values.phoneNumber}
                 onChange={handleChange}
@@ -138,81 +140,106 @@ const ATM = () => {
                 fullWidth
               />
             </Grid>
-            <Grid item width={"100%^"}>
-              <div
-                style={{
-                  position: "relative",
-                  border: "2px solid #B1B3B3",
-                  borderRadius: "8px",
-                  overflow: "hidden",
-                }}
+            <Grid item width={"100%"}>
+              <CurrencyInput
+                currency={"currency"}
+                amount={"amount"}
+                placeholder={"Məbləğ"}
+                currencyValue={values.currency}
+                inputValue={values.amount}
+                handleChangeSelect={(e) =>
+                  setFieldValue("currency", e.target.value, true)
+                }
+                handleChangeInput={(e) =>
+                  setFieldValue("amount", e.target.value, true)
+                }
+              />
+            </Grid>
+            <Grid item width={"100%"}>
+              <TextField
+                id="terminalNumber"
+                name="terminalNumber"
+                label="Bankomatın terminal nömrəsi və ünvanı"
+                variant="outlined"
+                value={values.terminalNumber}
+                onChange={handleChange}
+                error={touched.terminalNumber && Boolean(errors.terminalNumber)}
+                helperText={touched.terminalNumber && errors.terminalNumber}
+                fullWidth
+              />
+            </Grid>
+            <Grid item width={"100%"}>
+              <TextField
+                id="belongTerminal"
+                name="belongTerminal"
+                label="Bankomat hansı banka aiddir"
+                variant="outlined"
+                value={values.belongTerminal}
+                onChange={handleChange}
+                error={touched.belongTerminal && Boolean(errors.belongTerminal)}
+                helperText={touched.belongTerminal && errors.belongTerminal}
+                fullWidth
+              />
+            </Grid>
+            <Grid item width={"100%"}>
+              <TextField
+                id="cardNumber"
+                name="cardNumber"
+                label="Plastik kartın nömrəsi"
+                variant="outlined"
+                value={values.cardNumber}
+                onChange={handleChange}
+                error={touched.cardNumber && Boolean(errors.cardNumber)}
+                helperText={touched.cardNumber && errors.cardNumber}
+                fullWidth
+              />
+            </Grid>
+            <Grid item width={"100%"}>
+              <TextField
+                select
+                id="cardType"
+                name="cardType"
+                label="Plastik kartın növü"
+                value={values.cardType}
+                onChange={handleChange}
+                fullWidth
               >
-                <TextField
-                  select
-                  id="currency"
-                  name="currency"
-                  value={values.currency}
-                  onChange={handleChange}
-                  defaultValue={currencyOptions[0].value}
-                  style={{
-                    width: "100px",
-                    position: "absolute",
-                  }}
-                >
-                  {currencyOptions.map((option) => (
-                    <MenuItem key={option.value} value={option.value}>
-                      {option.label}
-                    </MenuItem>
-                  ))}
-                </TextField>
-                <input
-                  id="amount"
-                  name="amount"
-                  value={values.amount}
-                  onChange={handleChange}
-                  style={{
-                    display: "inline-block",
-                    border: "none",
-                    outline: "none",
-                    padding: "12px",
-                    color: "#75787B",
-                    paddingLeft: "110px",
-                    paddingRight: "30px",
-                  }}
-                />
-                {/* <TextField
-                  id="amount"
-                  name="amount"
-                  label="Məbləğ"
-                  variant="outlined"
-                  value={values.amount}
-                  onChange={handleChange}
-                  error={touched.amount && Boolean(errors.amount)}
-                  helperText={touched.amount && errors.amount}
-                  style={{ border: "none" }}
-                  fullWidth
-                /> */}
-              </div>
+                {cardTypes.map((option) => (
+                  <MenuItem key={option.value} value={option.value}>
+                    {option.label}
+                  </MenuItem>
+                ))}
+              </TextField>
+            </Grid>
+            <Grid item width={"100%"}>
+              <TextField
+                id="belongCard"
+                name="belongCard"
+                label="Plastik kart hansı banka aiddir"
+                variant="outlined"
+                value={values.belongCard}
+                onChange={handleChange}
+                error={touched.belongCard && Boolean(errors.belongCard)}
+                helperText={touched.belongCard && errors.belongCard}
+                fullWidth
+              />
+            </Grid>
+            <Grid item width={"100%"}>
+              <TextField
+                multiline
+                id="message"
+                name="message"
+                label="Hadisənin qısa şərhi"
+                variant="outlined"
+                value={values.message}
+                onChange={handleChange}
+                error={touched.message && Boolean(errors.message)}
+                helperText={touched.message && errors.message}
+                fullWidth
+              />
             </Grid>
           </Grid>
-          <Button
-            variant={"outlined"}
-            type="submit"
-            style={{
-              fontFamily: "Regular",
-              fontSize: "16px",
-              backgroundColor: "#FFB500",
-              padding: "5px 30px",
-              border: "none",
-              color: "#fff",
-              textTransform: "capitalize",
-              borderRadius: "38px",
-              width: "100%",
-              marginTop: "15px",
-            }}
-          >
-            Göndər
-          </Button>
+          <Button variant={"outlined"} type="submit" text={"Göndər"} />
         </Form>
       )}
     </Formik>

@@ -106,9 +106,6 @@ const Sidebar = () => {
                       />
                     </ListItemIcon>
                     <ListItemText
-                      style={{
-                        fontFamily: "Semibold !important",
-                      }}
                       primary={text}
                       sx={{ opacity: isSidebarOpen ? 1 : 0 }}
                     />
@@ -119,12 +116,12 @@ const Sidebar = () => {
           </Box>
           <Box>
             <Typography
-              fontFamily={"Proxima Nova"}
+              fontFamily={"Regular"}
+              fontSize={"15px"}
               textAlign={"center"}
               color={"#75787B"}
-              variant="body1"
               component={"p"}
-              paddingBottom={"30px"}
+              paddingBottom={"25px"}
             >
               Expresspay © 2013—2022
             </Typography>

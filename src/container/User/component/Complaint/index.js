@@ -1,7 +1,7 @@
-import { Button, Grid, MenuItem } from "@mui/material";
-import { Form, Formik } from "formik";
 import React from "react";
-import { TextField } from "../../../../components";
+import { Grid, MenuItem } from "@mui/material";
+import { Form, Formik } from "formik";
+import { TextField, Button } from "../../../../components";
 
 const Complaint = () => {
   const banks = [
@@ -134,24 +134,7 @@ const Complaint = () => {
               />
             </Grid>
           </Grid>
-          <Button
-            variant={"outlined"}
-            type="submit"
-            style={{
-              fontFamily: "Regular",
-              fontSize: "16px",
-              backgroundColor: "#FFB500",
-              padding: "5px 30px",
-              border: "none",
-              color: "#fff",
-              textTransform: "capitalize",
-              borderRadius: "38px",
-              width: "100%",
-              marginTop: "15px",
-            }}
-          >
-            Göndər
-          </Button>
+          <Button variant={"outlined"} type="submit" text={"Göndər"} />
         </Form>
       )}
     </Formik>

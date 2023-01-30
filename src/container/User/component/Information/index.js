@@ -1,7 +1,6 @@
 import React from "react";
 import {
   Box,
-  Button,
   Checkbox,
   FormControl,
   Grid,
@@ -11,7 +10,7 @@ import {
   Typography,
 } from "@mui/material";
 import { Form, Formik } from "formik";
-import { TextField } from "../../../../components";
+import { TextField, Button } from "../../../../components";
 import { FormControlLabel } from "../../../../components/FormControl";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
@@ -154,7 +153,8 @@ const Information = () => {
                 <TextField
                   id="phonenumber"
                   name="phonenumber"
-                  label="(+__) __ ___ __ __"
+                  label="Number"
+                  placeholder="(+__) __ ___ __ __"
                   variant="outlined"
                   value={values.phonenumber}
                   onChange={handleChange}
@@ -460,19 +460,10 @@ const Information = () => {
                   variant={"outlined"}
                   type="submit"
                   style={{
-                    fontFamily: "Proxima Nova",
-                    fontSize: "16px",
-                    backgroundColor: "#FFB500",
-                    padding: "5px 30px",
-                    border: "none",
-                    color: "#fff",
-                    textTransform: "capitalize",
-                    borderRadius: "38px",
                     width: "150px",
                   }}
-                >
-                  Daxil Et
-                </Button>
+                  text={"Daxil Et"}
+                />
               </Grid>
             </Grid>
           </Form>

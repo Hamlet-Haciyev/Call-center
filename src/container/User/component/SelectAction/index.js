@@ -1,15 +1,15 @@
 import React, { useState } from "react";
+import { Typography, Box, MenuItem } from "@mui/material";
+import { TextField } from "../../../../components";
 import ATM from "../ATM";
 import DeleteAccount from "../DeleteAccount";
 import Complaint from "../Complaint";
 import Record from "../Record";
-import { Typography, Box, MenuItem } from "@mui/material";
-import { TextField } from "../../../../components";
 
 const SelectAction = () => {
   const actions = [
     { label: "ATM", value: "ATM" },
-    { label: "Hesab sil", value: "Hesabi sil" },
+    { label: "Hesab sil", value: "Hesab sil" },
     { label: "Şikayət", value: "Şikayət" },
     { label: "Qeyd", value: "Qeyd" },
   ];
@@ -22,16 +22,16 @@ const SelectAction = () => {
       sx={{
         borderRadius: "12px",
         background: "#fff",
-        padding: "22px 35px",
+        padding: "20px 24px",
       }}
     >
       <Box display={"flex"} alignItems={"center"} mb="20px">
         <Typography
           fontFamily={"Regular"}
-          component={"h1"}
-          fontSize={"22px"}
+          component={"h2"}
+          fontSize={"21px"}
           color={"#FFA300"}
-          width="100px"
+          width="160px"
         >
           {value}
         </Typography>
@@ -45,7 +45,7 @@ const SelectAction = () => {
       </Box>
       {value === "ATM" ? (
         <ATM />
-      ) : value === "Hesabi sil" ? (
+      ) : value === "Hesab sil" ? (
         <DeleteAccount />
       ) : value === "Şikayət" ? (
         <Complaint />
