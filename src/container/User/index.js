@@ -3,6 +3,7 @@ import { createTheme, Grid, ThemeProvider } from "@mui/material";
 import { Box } from "@mui/system";
 import Information from "./component/Information";
 import SelectAction from "./component/SelectAction";
+import Credit from "./component/Credit";
 const User = () => {
   const breakPoints = createTheme({
     breakpoints: {
@@ -23,6 +24,9 @@ const User = () => {
           </Grid>
           <Grid item mobile={12} tablet={4} desktop={4}>
             <SelectAction />
+          </Grid>
+          <Grid item mobile={12} tablet={12} desktop={12}>
+            <Credit />
           </Grid>
         </Grid>
       </Box>

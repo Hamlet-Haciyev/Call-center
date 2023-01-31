@@ -1,251 +1,53 @@
-import React from "react";
+import React, { useState } from "react";
 import {
-  Box,
-  FormControl,
-  Grid,
-  InputLabel,
   MenuItem,
-  Select,
-  Typography,
 } from "@mui/material";
-import { Form, Formik } from "formik";
-import { TextField, Button } from "../../../../components";
-import CurrencyInput from "../../../../components/CurrencyInput";
+import { TextField } from "../../../../components";
+import Plasticcard from "./form/plasticcard";
+import Smsbanking from "./form/smsbanking";
+import ThreeDSecure from "./form/3dsecure";
+import Money from "./form/money";
 
 const ATM = () => {
   const paymentTypes = [
-    { label: "Pul", value: "Pul" },
-    { label: "Plastik Kart", value: "Plastik Kart" },
-    { label: "SMS Banking", value: "SMS Banking" },
-    { label: "3D Secure", value: "3D Secure " },
+    { label: "Pul", value: "pul" },
+    { label: "Plastik Kart", value: "plastikkart" },
+    { label: "SMS Banking", value: "smsbanking" },
+    { label: "3D Secure", value: "3dsecure" },
   ];
-  const cardTypes = [
-    { label: "Business card", value: "businesscard" },
-    { label: "Expresscard", value: "expresscard" },
-    { label: "Expresso", value: "expresso" },
-    { label: "Maestro", value: "maestro " },
-  ];
+  const [pymType, setPymSype] = useState("pul");
+  const handleChangePaymentType = (e) => {
+    setPymSype(e.target.value);
+  };
   return (
-    <Formik
-      initialValues={{
-        paymentType: "Pul",
-        firtName: "",
-        lastName: "",
-        fatherName: "",
-        identificationSerie: "",
-        phoneNumber: "",
-        date: "",
-        time: "",
-        currency: "azn",
-        amount: "",
-        terminalNumber: "",
-        belongTerminal: "",
-        cardNumber: "",
-        cardType: "",
-        belongCard: "",
-        message: "",
-      }}
-      onSubmit={(values) => {
-        alert(JSON.stringify(values, null, 2));
-      }}
-    >
-      {({ errors, touched, values, handleChange, setFieldValue }) => (
-        <Form>
-          <Grid container rowSpacing={2.5}>
-            <Grid item width={"100%"}>
-              <TextField
-                select
-                id="paymentType"
-                name="paymentType"
-                label={values.paymentType}
-                value={values.paymentType}
-                onChange={handleChange}
-                fullWidth
-              >
-                {paymentTypes.map((option) => (
-                  <MenuItem key={option.value} value={option.value}>
-                    {option.label}
-                  </MenuItem>
-                ))}
-              </TextField>
-            </Grid>
-            <Grid item width={"100%"}>
-              <TextField
-                id="firtName"
-                name="firtName"
-                label="Adı"
-                variant="outlined"
-                value={values.firtName}
-                onChange={handleChange}
-                error={touched.firtName && Boolean(errors.firtName)}
-                helperText={touched.firtName && errors.firtName}
-                fullWidth
-              />
-            </Grid>
-            <Grid item width={"100%"}>
-              <TextField
-                id="lastName"
-                name="lastName"
-                label="Soyadı"
-                variant="outlined"
-                value={values.lastName}
-                onChange={handleChange}
-                error={touched.lastName && Boolean(errors.lastName)}
-                helperText={touched.lastName && errors.lastName}
-                fullWidth
-              />
-            </Grid>
-            <Grid item width={"100%"}>
-              <TextField
-                id="fatherName"
-                name="fatherName"
-                label="Ata adı"
-                variant="outlined"
-                value={values.fatherName}
-                onChange={handleChange}
-                error={touched.fatherName && Boolean(errors.fatherName)}
-                helperText={touched.fatherName && errors.fatherName}
-                fullWidth
-              />
-            </Grid>
-            <Grid item width={"100%"}>
-              <TextField
-                id="identificationSerie"
-                name="identificationSerie"
-                label="Vəsiqənin seriya və nömrəsi"
-                variant="outlined"
-                value={values.identificationSerie}
-                onChange={handleChange}
-                error={
-                  touched.identificationSerie &&
-                  Boolean(errors.identificationSerie)
-                }
-                helperText={
-                  touched.identificationSerie && errors.identificationSerie
-                }
-                fullWidth
-              />
-            </Grid>
-            <Grid item width={"100%"}>
-              <TextField
-                id="phoneNumber"
-                name="phoneNumber"
-                label="Number"
-                placeholder="(+__) __ ___ __ __"
-                variant="outlined"
-                value={values.phoneNumber}
-                onChange={handleChange}
-                error={touched.phoneNumber && Boolean(errors.phoneNumber)}
-                helperText={touched.phoneNumber && errors.phoneNumber}
-                fullWidth
-              />
-            </Grid>
-            <Grid item width={"100%"}>
-              <CurrencyInput
-                currency={"currency"}
-                amount={"amount"}
-                placeholder={"Məbləğ"}
-                currencyValue={values.currency}
-                inputValue={values.amount}
-                handleChangeSelect={(e) =>
-                  setFieldValue("currency", e.target.value, true)
-                }
-                handleChangeInput={(e) =>
-                  setFieldValue("amount", e.target.value, true)
-                }
-              />
-            </Grid>
-            <Grid item width={"100%"}>
-              <TextField
-                id="terminalNumber"
-                name="terminalNumber"
-                label="Bankomatın terminal nömrəsi və ünvanı"
-                variant="outlined"
-                value={values.terminalNumber}
-                onChange={handleChange}
-                error={touched.terminalNumber && Boolean(errors.terminalNumber)}
-                helperText={touched.terminalNumber && errors.terminalNumber}
-                fullWidth
-              />
-            </Grid>
-            <Grid item width={"100%"}>
-              <TextField
-                id="belongTerminal"
-                name="belongTerminal"
-                label="Bankomat hansı banka aiddir"
-                variant="outlined"
-                value={values.belongTerminal}
-                onChange={handleChange}
-                error={touched.belongTerminal && Boolean(errors.belongTerminal)}
-                helperText={touched.belongTerminal && errors.belongTerminal}
-                fullWidth
-              />
-            </Grid>
-            <Grid item width={"100%"}>
-              <TextField
-                id="cardNumber"
-                name="cardNumber"
-                label="Plastik kartın nömrəsi"
-                variant="outlined"
-                value={values.cardNumber}
-                onChange={handleChange}
-                error={touched.cardNumber && Boolean(errors.cardNumber)}
-                helperText={touched.cardNumber && errors.cardNumber}
-                fullWidth
-              />
-            </Grid>
-            <Grid item width={"100%"}>
-              <TextField
-                select
-                id="cardType"
-                name="cardType"
-                label="Plastik kartın növü"
-                value={values.cardType}
-                onChange={handleChange}
-                fullWidth
-              >
-                {cardTypes.map((option) => (
-                  <MenuItem key={option.value} value={option.value}>
-                    {option.label}
-                  </MenuItem>
-                ))}
-              </TextField>
-            </Grid>
-            <Grid item width={"100%"}>
-              <TextField
-                id="belongCard"
-                name="belongCard"
-                label="Plastik kart hansı banka aiddir"
-                variant="outlined"
-                value={values.belongCard}
-                onChange={handleChange}
-                error={touched.belongCard && Boolean(errors.belongCard)}
-                helperText={touched.belongCard && errors.belongCard}
-                fullWidth
-              />
-            </Grid>
-            <Grid item width={"100%"}>
-              <TextField
-                multiline
-                id="message"
-                name="message"
-                label="Hadisənin qısa şərhi"
-                variant="outlined"
-                value={values.message}
-                onChange={handleChange}
-                error={touched.message && Boolean(errors.message)}
-                helperText={touched.message && errors.message}
-                fullWidth
-              />
-            </Grid>
-          </Grid>
-          <Button variant={"outlined"} type="submit" text={"Göndər"} />
-        </Form>
+    <>
+      <TextField
+        select
+        id="paymentType"
+        name="paymentType"
+        label={pymType}
+        value={pymType}
+        onChange={(e) => handleChangePaymentType(e)}
+        style={{ marginBottom: "20px" }}
+        fullWidth
+      >
+        {paymentTypes.map((option) => (
+          <MenuItem key={option.value} value={option.value}>
+            {option.label}
+          </MenuItem>
+        ))}
+      </TextField>
+      {pymType === "pul" ? (
+        <Money />
+      ) : pymType === "plastikkart" ? (
+        <Plasticcard />
+      ) : pymType === "smsbanking" ? (
+        <Smsbanking />
+      ) : (
+        <ThreeDSecure />
       )}
-    </Formik>
+    </>
   );
 };
 
 export default ATM;
-//  https://codepen.io/jhawthorn/pen/qrPrXV (currency input)
-//  https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/time

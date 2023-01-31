@@ -1,9 +1,41 @@
-import React from 'react'
-
+import React from "react";
+import { Grid } from "@mui/material";
+import { Form, Formik } from "formik";
+import { Button, TextField } from "../../../../components";
 const Record = () => {
+  const initialValues = {
+    message: "",
+  };
   return (
-    <div>Record</div>
-  )
-}
+    <Formik
+      initialValues={initialValues}
+      onSubmit={(values) => {
+        alert(JSON.stringify(values, null, 2));
+      }}
+    >
+      {({ errors, touched, values, handleChange }) => (
+        <Form>
+          <Grid container rowSpacing={2.5}>
+            <Grid item width={"100%"}>
+              <TextField
+                multiline
+                id="message"
+                name="message"
+                label="Qeyd..."
+                variant="outlined"
+                value={values.message}
+                onChange={handleChange}
+                error={touched.message && Boolean(errors.message)}
+                helperText={touched.message && errors.message}
+                fullWidth
+              />
+            </Grid>
+          </Grid>
+          <Button variant={"outlined"} type="submit" text={"Göndər"} />
+        </Form>
+      )}
+    </Formik>
+  );
+};
 
-export default Record
+export default Record;
