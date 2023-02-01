@@ -5,6 +5,7 @@ import { TextField, Button } from "../../../../../components";
 import { CurrencyInput } from "../../../../../components";
 import { DesktopDatePicker, LocalizationProvider } from "@mui/x-date-pickers";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
+import dayjs from "dayjs";
 // import { DateTimePicker, MuiPickersUtilsProvider } from '@mui/material';
 const Money = () => {
   const cardTypes = [
@@ -22,8 +23,8 @@ const Money = () => {
         fatherName: "",
         identificationSerie: "",
         phoneNumber: "",
-        date: null,
-        time: "",
+        date: dayjs(new Date()),
+        time: "07:30",
         currency: "azn",
         amount: "",
         terminalNumber: "",
@@ -111,8 +112,8 @@ const Money = () => {
                 fullWidth
               />
             </Grid>
-            <Grid>
-              {/* <LocalizationProvider dateAdapter={AdapterDayjs}>
+            <Grid item display={"flex"} gap={2}>
+              <LocalizationProvider dateAdapter={AdapterDayjs}>
                 <DesktopDatePicker
                   id="date"
                   name="date"
@@ -120,9 +121,26 @@ const Money = () => {
                   inputFormat="DD / MM / YYYY"
                   value={values.date}
                   onChange={(value) => setFieldValue("date", value, true)}
-                  renderInput={(params) => <TextField {...params} fullWidth />}
+                  renderInput={(params) => <TextField {...params} />}
                 />
               </LocalizationProvider>
+              <Field
+                name="time"
+                render={({ field }) => (
+                  <TextField
+                    {...field}
+                    id="time"
+                    label="Time"
+                    type="time"
+                    InputProps={{
+                      inputProps: {
+                        step: 3600, // 1 hour
+                      },
+                    }}
+                  />
+                )}
+              />
+              {/*
               <LocalizationProvider dateAdapter={AdapterDayjs}>
                 <TextField
                   id="time"

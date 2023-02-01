@@ -1,12 +1,13 @@
-import {
-  Box,
-  createTheme,
-  Tab,
-  Tabs,
-  ThemeProvider,
-  Typography,
-} from "@mui/material";
+import { Box, createTheme, Tab, Tabs, ThemeProvider } from "@mui/material";
 import React from "react";
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableHead,
+  TableRow,
+} from "@mui/material";
 const TabPanel = (props) => {
   const { children, value, index, ...other } = props;
   return (
@@ -17,21 +18,18 @@ const TabPanel = (props) => {
       aria-labelledby={`simple-tab-${index}`}
       {...other}
     >
-      {value === index && (
-        <Box sx={{ p: 3 }}>
-          <Typography>{children}</Typography>
-        </Box>
-      )}
+      {value === index && <Box maxWidth={"1170px"}>{children}</Box>}
     </div>
   );
 };
-function a11yProps(index) {
+const a11yProps = (index) => {
   return {
     id: `simple-tab-${index}`,
     "aria-controls": `simple-tabpanel-${index}`,
   };
-}
+};
 const Credit = () => {
+  const data = [{ name: 1243412, age: 12345, city: 123 }];
   const themeTabs = createTheme({
     components: {
       MuiTab: {
@@ -57,6 +55,16 @@ const Credit = () => {
           },
         },
       },
+      MuiTableCell: {
+        styleOverrides: {
+          root: {},
+        },
+      },
+      MuiTable: {
+        styleOverrides: {
+          root: {},
+        },
+      },
     },
   });
   const [value, setValue] = React.useState(0);
@@ -66,13 +74,18 @@ const Credit = () => {
   return (
     <ThemeProvider theme={themeTabs}>
       <div
-        style={{ marginTop: "10px", background: "#fff", borderRadius: "12px" }}
+        style={{
+          marginTop: "10px",
+          background: "#fff",
+          borderRadius: "12px",
+          overflow: "hidden",
+        }}
       >
         <Box
           sx={{
             borderBottom: 1,
-            borderColor: "divider",
-            borderWidth: "solid #E1E1E1",
+            borderColor: "#E1E1E1",
+            maxHeight: "100%",
           }}
         >
           <Tabs value={value} onChange={handleChange}>
@@ -84,7 +97,40 @@ const Credit = () => {
           </Tabs>
         </Box>
         <TabPanel value={value} index={0}>
-          Item One
+          <TableContainer>
+            <Table aria-label="scrollable table">
+              <TableHead>
+                <TableRow>
+                  <TableCell>Müqavilə nömrəsi</TableCell>
+                  <TableCell>Müqavilə nömrəsi</TableCell>
+                  <TableCell>Müqavilə məbləği</TableCell>
+                  <TableCell>Əsas borc qalığı</TableCell>
+                  <TableCell>Hesab qalığı</TableCell>
+                  <TableCell>Növbəti ödəniş tarixi</TableCell>
+                  <TableCell>Müqavilə nömrəsi</TableCell>
+                  <TableCell>Müqavilə nömrəsi</TableCell>
+                  <TableCell>Müqavilə nömrəsi</TableCell>
+                  <TableCell>Müqavilə nömrəsi</TableCell>
+                  <TableCell>Müqavilə nömrəsi</TableCell>
+                  <TableCell>Müqavilə nömrəsi</TableCell>
+                  <TableCell>Müqavilə nömrəsi</TableCell>
+                  <TableCell>Müqavilə nömrəsi</TableCell>
+                  <TableCell>Müqavilə nömrəsi</TableCell>
+                </TableRow>
+              </TableHead>
+              <TableBody>
+                {data.map((row) => (
+                  <TableRow key={row.name}>
+                    <TableCell component="th" scope="row">
+                      {row.name}
+                    </TableCell>
+                    <TableCell>{row.age}</TableCell>
+                    <TableCell>{row.city}</TableCell>
+                  </TableRow>
+                ))}
+              </TableBody>
+            </Table>
+          </TableContainer>
         </TabPanel>
         <TabPanel value={value} index={1}>
           Item Two
