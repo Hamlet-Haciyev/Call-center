@@ -6,7 +6,6 @@ import { CurrencyInput } from "../../../../../components";
 import { DesktopDatePicker, LocalizationProvider } from "@mui/x-date-pickers";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import dayjs from "dayjs";
-// import { DateTimePicker, MuiPickersUtilsProvider } from '@mui/material';
 const Money = () => {
   const cardTypes = [
     { label: "Business card", value: "businesscard" },
@@ -24,7 +23,7 @@ const Money = () => {
         identificationSerie: "",
         phoneNumber: "",
         date: dayjs(new Date()),
-        time: "07:30",
+        time: dayjs(new Date()).format("hh:mm"),
         currency: "azn",
         amount: "",
         terminalNumber: "",
@@ -112,7 +111,7 @@ const Money = () => {
                 fullWidth
               />
             </Grid>
-            <Grid item display={"flex"} gap={2}>
+            <Grid item display={"flex"} gap={1}>
               <LocalizationProvider dateAdapter={AdapterDayjs}>
                 <DesktopDatePicker
                   id="date"
@@ -124,32 +123,17 @@ const Money = () => {
                   renderInput={(params) => <TextField {...params} />}
                 />
               </LocalizationProvider>
-              <Field
-                name="time"
-                render={({ field }) => (
-                  <TextField
-                    {...field}
-                    id="time"
-                    label="Time"
-                    type="time"
-                    InputProps={{
-                      inputProps: {
-                        step: 3600, // 1 hour
-                      },
-                    }}
-                  />
-                )}
-              />
-              {/*
               <LocalizationProvider dateAdapter={AdapterDayjs}>
                 <TextField
                   id="time"
-                  name="time"
+                  name={"time"}
+                  label="Başvermə Vaxtı"
                   type="time"
                   value={values.time}
-                  onChange={(value) => setFieldValue("time", value, true)}
+                  onChange={handleChange}
+                  sx={{ width: 210 }}
                 />
-              </LocalizationProvider> */}
+              </LocalizationProvider>
             </Grid>
             <Grid item width={"100%"}>
               <CurrencyInput

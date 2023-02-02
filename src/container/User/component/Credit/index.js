@@ -1,13 +1,10 @@
-import { Box, createTheme, Tab, Tabs, ThemeProvider } from "@mui/material";
 import React from "react";
-import {
-  Table,
-  TableBody,
-  TableCell,
-  TableContainer,
-  TableHead,
-  TableRow,
-} from "@mui/material";
+import { Box, createTheme, Tab, Tabs, ThemeProvider } from "@mui/material";
+import TableCredit from "./table/credit";
+import CardCredit from "./table/cardCredit";
+import CurrentAccount from "./table/currentAccount";
+import BankCard from "./table/bankCard";
+import Deposit from "./table/deposit";
 const TabPanel = (props) => {
   const { children, value, index, ...other } = props;
   return (
@@ -28,8 +25,8 @@ const a11yProps = (index) => {
     "aria-controls": `simple-tabpanel-${index}`,
   };
 };
+
 const Credit = () => {
-  const data = [{ name: 1243412, age: 12345, city: 123 }];
   const themeTabs = createTheme({
     components: {
       MuiTab: {
@@ -38,7 +35,7 @@ const Credit = () => {
             fontFamily: "Regular",
             textTransform: "capitalize",
             padding: "20px 10px",
-            width: "150px",
+            width: "180px",
             "&.Mui-selected": {
               color: "#FFA300",
             },
@@ -57,12 +54,27 @@ const Credit = () => {
       },
       MuiTableCell: {
         styleOverrides: {
-          root: {},
+          root: {
+            textAlign: "center",
+            minWidth: "180px",
+            borderRight: "1px solid #D0D0CE",
+          },
         },
       },
-      MuiTable: {
+      MuiTableContainer: {
         styleOverrides: {
-          root: {},
+          root: {
+            "&::-webkit-scrollbar": {
+              height: "8px",
+            },
+            "&::-webkit-scrollbar-track": {
+              background: "#FBFBFB",
+            },
+            "&::-webkit-scrollbar-thumb": {
+              background: "#D9D9D9",
+              borderRadius: "10px",
+            },
+          },
         },
       },
     },
@@ -89,7 +101,7 @@ const Credit = () => {
           }}
         >
           <Tabs value={value} onChange={handleChange}>
-            <Tab label="Kredit" {...a11yProps(0)} />
+            <Tab  label="Kredit" {...a11yProps(0)} />
             <Tab label="Kart Krediti" {...a11yProps(1)} />
             <Tab label="Əmanət" {...a11yProps(2)} />
             <Tab label="Bank Kartı" {...a11yProps(3)} />
@@ -97,52 +109,19 @@ const Credit = () => {
           </Tabs>
         </Box>
         <TabPanel value={value} index={0}>
-          <TableContainer>
-            <Table aria-label="scrollable table">
-              <TableHead>
-                <TableRow>
-                  <TableCell>Müqavilə nömrəsi</TableCell>
-                  <TableCell>Müqavilə nömrəsi</TableCell>
-                  <TableCell>Müqavilə məbləği</TableCell>
-                  <TableCell>Əsas borc qalığı</TableCell>
-                  <TableCell>Hesab qalığı</TableCell>
-                  <TableCell>Növbəti ödəniş tarixi</TableCell>
-                  <TableCell>Müqavilə nömrəsi</TableCell>
-                  <TableCell>Müqavilə nömrəsi</TableCell>
-                  <TableCell>Müqavilə nömrəsi</TableCell>
-                  <TableCell>Müqavilə nömrəsi</TableCell>
-                  <TableCell>Müqavilə nömrəsi</TableCell>
-                  <TableCell>Müqavilə nömrəsi</TableCell>
-                  <TableCell>Müqavilə nömrəsi</TableCell>
-                  <TableCell>Müqavilə nömrəsi</TableCell>
-                  <TableCell>Müqavilə nömrəsi</TableCell>
-                </TableRow>
-              </TableHead>
-              <TableBody>
-                {data.map((row) => (
-                  <TableRow key={row.name}>
-                    <TableCell component="th" scope="row">
-                      {row.name}
-                    </TableCell>
-                    <TableCell>{row.age}</TableCell>
-                    <TableCell>{row.city}</TableCell>
-                  </TableRow>
-                ))}
-              </TableBody>
-            </Table>
-          </TableContainer>
+          <TableCredit />
         </TabPanel>
         <TabPanel value={value} index={1}>
-          Item Two
+          <CardCredit />
         </TabPanel>
         <TabPanel value={value} index={2}>
-          Item Three
+          <Deposit />
         </TabPanel>
         <TabPanel value={value} index={3}>
-          Item Four
+          <BankCard />
         </TabPanel>
         <TabPanel value={value} index={4}>
-          Item Five
+          <CurrentAccount />
         </TabPanel>
       </div>
     </ThemeProvider>

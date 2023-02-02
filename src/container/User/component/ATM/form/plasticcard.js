@@ -1,7 +1,13 @@
 import React from "react";
 import { Grid } from "@mui/material";
 import { Form, Formik } from "formik";
-import { TextField ,Button} from "../../../../../components";
+import { TextField, Button } from "../../../../../components";
+import {
+  DesktopDatePicker,
+  LocalizationProvider,
+} from "@mui/x-date-pickers";
+import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
+import dayjs from "dayjs";
 
 const Plasticcard = () => {
   return (
@@ -12,8 +18,8 @@ const Plasticcard = () => {
         lastName: "",
         fatherName: "",
         phoneNumber: "",
-        date: "",
-        time: "",
+        date: dayjs(new Date()),
+        time: dayjs(new Date()).format("hh:mm"),
         terminalNumber: "",
         belongCard: "",
         message: "",
@@ -77,6 +83,30 @@ const Plasticcard = () => {
                 helperText={touched.phoneNumber && errors.phoneNumber}
                 fullWidth
               />
+            </Grid>
+            <Grid item display={"flex"} gap={1}>
+              <LocalizationProvider dateAdapter={AdapterDayjs}>
+                <DesktopDatePicker
+                  id="date"
+                  name="date"
+                  label="Başvermə tarixi"
+                  inputFormat="DD / MM / YYYY"
+                  value={values.date}
+                  onChange={(value) => setFieldValue("date", value, true)}
+                  renderInput={(params) => <TextField {...params} />}
+                />
+              </LocalizationProvider>
+              <LocalizationProvider dateAdapter={AdapterDayjs}>
+                <TextField
+                  id="time"
+                  name={"time"}
+                  label="Başvermə Vaxtı"
+                  type="time"
+                  value={values.time}
+                  onChange={handleChange}
+                  sx={{ width: 210 }}
+                />
+              </LocalizationProvider>
             </Grid>
             <Grid item width={"100%"}>
               <TextField
