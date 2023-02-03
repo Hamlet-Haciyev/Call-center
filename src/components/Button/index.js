@@ -1,7 +1,7 @@
 import React from "react";
 import { Button as MuiButton, createTheme, ThemeProvider } from "@mui/material";
 
-const Button = ({ text, ...props }) => {
+const Button = ({ text, radius = "12px", ...props }) => {
   const themeButton = createTheme({
     components: {
       MuiButton: {
@@ -10,12 +10,10 @@ const Button = ({ text, ...props }) => {
             fontFamily: "Regular",
             fontSize: "16px",
             backgroundColor: "#FFB500",
-            padding: "5px 30px",
             color: "#fff",
             textTransform: "capitalize",
-            borderRadius: "38px",
+            borderRadius: radius,
             width: "100%",
-            marginTop: "15px",
             border: "none",
             "&:hover": {
               backgroundColor: "#FFA300",

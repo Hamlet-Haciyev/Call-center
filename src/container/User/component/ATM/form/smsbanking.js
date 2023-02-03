@@ -102,8 +102,15 @@ const Smsbanking = () => {
                 fullWidth
               />
             </Grid>
+            <Grid item width={"100%"}>
+              <Button
+                variant={"outlined"}
+                type="submit"
+                text={"Göndər"}
+                radius={"38px"}
+              />
+            </Grid>
           </Grid>
-          <Button variant={"outlined"} type="submit" text={"Göndər"} />
         </Form>
       )}
     </Formik>

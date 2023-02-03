@@ -47,30 +47,30 @@ export const themeSetting = createTheme({
     },
   },
   typography: {
-    fontFamily: ["Inter", "sans-serif"].join(","),
+    fontFamily: "Regular",
     fontSize: 14,
     h1: {
-      fontFamily: ["Inter", "sans-serif"].join(","),
+      fontFamily: "Regular",
       fontSize: 40,
     },
     h2: {
-      fontFamily: ["Inter", "sans-serif"].join(","),
+      fontFamily: "Regular",
       fontSize: 32,
     },
     h3: {
-      fontFamily: ["Inter", "sans-serif"].join(","),
+      fontFamily: "Regular",
       fontSize: 24,
     },
     h4: {
-      fontFamily: ["Inter", "sans-serif"].join(","),
+      fontFamily: "Regular",
       fontSize: 20,
     },
     h5: {
-      fontFamily: ["Inter", "sans-serif"].join(","),
+      fontFamily: "Regular",
       fontSize: 16,
     },
     h6: {
-      fontFamily: ["Inter", "sans-serif"].join(","),
+      fontFamily: "Regular",
       fontSize: 14,
     },
   },

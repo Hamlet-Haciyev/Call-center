@@ -2,10 +2,7 @@ import React from "react";
 import { Grid } from "@mui/material";
 import { Form, Formik } from "formik";
 import { TextField, Button } from "../../../../../components";
-import {
-  DesktopDatePicker,
-  LocalizationProvider,
-} from "@mui/x-date-pickers";
+import { DesktopDatePicker, LocalizationProvider } from "@mui/x-date-pickers";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import dayjs from "dayjs";
 
@@ -149,8 +146,15 @@ const Plasticcard = () => {
                 fullWidth
               />
             </Grid>
+            <Grid item width={"100%"}>
+              <Button
+                variant={"outlined"}
+                type="submit"
+                text={"Göndər"}
+                radius={"38px"}
+              />
+            </Grid>
           </Grid>
-          <Button variant={"outlined"} type="submit" text={"Göndər"} />
         </Form>
       )}
     </Formik>

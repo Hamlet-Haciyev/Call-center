@@ -16,7 +16,7 @@ const Sidebar = () => {
   const navigate = useNavigate(null);
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
   const [selectedIndex, setSelectedIndex] = useState(0);
-
+  
   const handleListItemClick = (event, index) => {
     setSelectedIndex(index);
   };

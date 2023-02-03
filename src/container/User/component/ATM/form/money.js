@@ -1,6 +1,6 @@
 import React from "react";
 import { Grid, MenuItem } from "@mui/material";
-import { Field, Form, Formik } from "formik";
+import { Form, Formik } from "formik";
 import { TextField, Button } from "../../../../../components";
 import { CurrencyInput } from "../../../../../components";
 import { DesktopDatePicker, LocalizationProvider } from "@mui/x-date-pickers";
@@ -233,8 +233,15 @@ const Money = () => {
                 fullWidth
               />
             </Grid>
+            <Grid item width={"100%"}>
+              <Button
+                variant={"outlined"}
+                type="submit"
+                text={"Göndər"}
+                radius={"38px"}
+              />
+            </Grid>
           </Grid>
-          <Button variant={"outlined"} type="submit" text={"Göndər"} />
         </Form>
       )}
     </Formik>
@@ -242,4 +249,3 @@ const Money = () => {
 };
 
 export default Money;
-//  https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/time

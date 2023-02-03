@@ -29,6 +29,16 @@ const a11yProps = (index) => {
 const Credit = () => {
   const themeTabs = createTheme({
     components: {
+      MuiTabs: {
+        styleOverrides: {
+          root: {
+            "& .MuiTabs-indicator": {
+              backgroundColor: "#FFA300",
+              height: "3px",
+            },
+          },
+        },
+      },
       MuiTab: {
         styleOverrides: {
           root: {
@@ -38,16 +48,6 @@ const Credit = () => {
             width: "180px",
             "&.Mui-selected": {
               color: "#FFA300",
-            },
-          },
-        },
-      },
-      MuiTabs: {
-        styleOverrides: {
-          root: {
-            "& .MuiTabs-indicator": {
-              backgroundColor: "#FFA300",
-              height: "3px",
             },
           },
         },
@@ -101,7 +101,7 @@ const Credit = () => {
           }}
         >
           <Tabs value={value} onChange={handleChange}>
-            <Tab  label="Kredit" {...a11yProps(0)} />
+            <Tab label="Kredit" {...a11yProps(0)} />
             <Tab label="Kart Krediti" {...a11yProps(1)} />
             <Tab label="Əmanət" {...a11yProps(2)} />
             <Tab label="Bank Kartı" {...a11yProps(3)} />

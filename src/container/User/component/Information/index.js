@@ -463,6 +463,7 @@ const Information = () => {
                     width: "150px",
                   }}
                   text={"Daxil Et"}
+                  radius={"38px"}
                 />
               </Grid>
             </Grid>
