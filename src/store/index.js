@@ -1,9 +1,12 @@
-import { configureStore } from "@reduxjs/toolkit";
-import { settingAPI } from "../services/setting";
+import { configureStore, getDefaultMiddleware } from "@reduxjs/toolkit";
+import documentReducer from "./document";
 export const store = configureStore({
   reducer: {
-    settingAPI: settingAPI.reducer,
+    document: documentReducer,
   },
-  middleware: (getDefaultMiddleware) =>
-    getDefaultMiddleware().concat(settingAPI.middleware),
+  middleware: [
+    ...getDefaultMiddleware({
+      serializableCheck: false,
+    }),
+  ],
 });
