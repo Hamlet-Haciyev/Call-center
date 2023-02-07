@@ -248,6 +248,24 @@ const DeleteIcon = () => {
     </svg>
   );
 };
+const CloseIcon = () => {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="22"
+      height="22"
+      viewBox="0 0 22 22"
+      fill="none"
+    >
+      <path
+        fillRule="evenodd"
+        clipRule="evenodd"
+        d="M2.4205 0.829505C1.98116 0.390165 1.26884 0.390165 0.829505 0.829505C0.390165 1.26884 0.390165 1.98116 0.829505 2.4205L9.40901 11L0.829505 19.5795C0.390165 20.0188 0.390165 20.7312 0.829505 21.1705C1.26884 21.6098 1.98116 21.6098 2.4205 21.1705L11 12.591L19.5795 21.1705C20.0188 21.6098 20.7312 21.6098 21.1705 21.1705C21.6098 20.7312 21.6098 20.0188 21.1705 19.5795L12.591 11L21.1705 2.4205C21.6098 1.98116 21.6098 1.26884 21.1705 0.829505C20.7312 0.390165 20.0188 0.390165 19.5795 0.829505L11 9.40901L2.4205 0.829505Z"
+        fill="#FFA300"
+      />
+    </svg>
+  );
+};
 const icons = {
   logo: LogoIcon,
   hamburger: HamburgerIcon,
@@ -258,6 +276,7 @@ const icons = {
   edit: EditIcon,
   add: AddIcon,
   delete: DeleteIcon,
+  close: CloseIcon,
 };
 export const Icon = ({ name, color }) => {
   const Component = icons[name];

@@ -1,10 +1,12 @@
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useState } from "react";
 import { Box, Typography } from "@mui/material";
 import { DataGrid } from "@mui/x-data-grid";
-import { Button } from "../../../../components";
+import { Button, Modal } from "../../../../components";
 import { Icon } from "../../../../assets/icons";
-import { GetAllPeople } from "../../../../store/document";
-import { useDispatch, useSelector } from "react-redux";
+import {
+  useGetDocumentsQuery,
+  useDeleteDocumentMutation,
+} from "../../../../services/document";
 const DataGridSx = {
   border: "none",
   height: "421px",
@@ -46,15 +48,90 @@ const DataGridSx = {
 };
 
 const DocumentBoard = () => {
-  const data = useSelector((state) => state.document.data);
+  const {
+    data = [
+      {
+        id: 1,
+        documentName: "Təhsil",
+        fileLength: ".pdf",
+        size: "80KB",
+        postDate: "2.02.2023",
+      },
+      {
+        id: 2,
+        documentName: "TV və internet",
+        fileLength: ".pdf",
+        size: "52KB",
+        postDate: "2.07.2023",
+      },
+      {
+        id: 3,
+        documentName: "Qalıq kartı",
+        fileLength: ".pdf",
+        size: "25KB",
+        postDate: "2.09.2023",
+      },
+      {
+        id: 4,
+        documentName: "Müştəri siyahısı",
+        fileLength: ".pdf",
+        size: "58KB",
+        postDate: "2.01.2023",
+      },
+      {
+        id: 5,
+        documentName: "Hamlet",
+        fileLength: ".pdf",
+        size: "41KB",
+        postDate: "2.02.2023",
+      },
+      {
+        id: 6,
+        documentName: "Hamlet",
+        fileLength: ".pdf",
+        size: "41KB",
+        postDate: "2.02.2023",
+      },
+      {
+        id: 7,
+        documentName: "Hamlet",
+        fileLength: ".pdf",
+        size: "41KB",
+        postDate: "2.02.2023",
+      },
+      {
+        id: 8,
+        documentName: "Təhsil",
+        fileLength: ".pdf",
+        size: "80KB",
+        postDate: "2.02.2023",
+      },
+      {
+        id: 9,
+        documentName: "TV və internet",
+        fileLength: ".pdf",
+        size: "52KB",
+        postDate: "2.07.2023",
+      },
+      {
+        id: 10,
+        documentName: "Qalıq kartı",
+        fileLength: ".pdf",
+        size: "25KB",
+        postDate: "2.09.2023",
+      },
+    ],
+    isLoading,
+    error,
+  } = useGetDocumentsQuery();
+  const [deleteDocument, response] = useDeleteDocumentMutation();
   const [page, setPage] = useState(0);
   const [pageSize, setPageSize] = useState(6);
-  const dispatch = useDispatch();
-  useEffect(() => {
-    console.log(dispatch(GetAllPeople()));
-    console.log(data);
-  }, []);
-  const [rows, setRows] = useState([]);
+  const [deletePopupOpen, setDeletePopupOpen] = useState({
+    isDelete: false,
+    itemId: null,
+  });
+  const [rows, setRows] = useState(data || []);
 
   const [columns, setColumns] = useState([
     {
@@ -98,7 +175,9 @@ const DocumentBoard = () => {
           </Box>
           <Box
             sx={{ cursor: "pointer" }}
-            onClick={() => handleDeleteItem(row.id)}
+            onClick={() =>
+              setDeletePopupOpen({ isDelete: true, itemId: row.id })
+            }
           >
             <Icon name={"delete"} />
           </Box>
@@ -108,9 +187,16 @@ const DocumentBoard = () => {
       width: 100,
     },
   ]);
-  const handleDeleteItem = (id) => {
-    setRows(rows.filter((row) => row.id !== id));
-  };
+
+  const handleDeleteItem = useCallback(
+    (id) => {
+      deleteDocument(id);
+      setRows(data.filter((row) => row.id !== id));
+      setDeletePopupOpen({ isDelete: false, itemId: null });
+    },
+    [deletePopupOpen]
+  );
+
   return (
     <Box
       sx={{
@@ -120,6 +206,68 @@ const DocumentBoard = () => {
         mb: "20px",
       }}
     >
+      {deletePopupOpen.isDelete ? (
+        <Modal
+          open={deletePopupOpen.isDelete}
+          onClose={setDeletePopupOpen}
+          aria-labelledby="parent-modal-title"
+          aria-describedby="parent-modal-description"
+        >
+          <Box
+            sx={{
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+              background: "#fff",
+              padding: "30px 20px 60px 20px",
+              borderRadius: "8px",
+              width: 490,
+            }}
+          >
+            <div className="closebtn-wrapper">
+              <button
+                variant="outlined"
+                onClick={() =>
+                  setDeletePopupOpen({ isDelete: false, itemId: null })
+                }
+                className="closebtn"
+              >
+                <Icon name={"close"} />
+              </button>
+            </div>
+            <h2 className="modal-title">Silmək istədiyinizdən əminsiniz??</h2>
+            <Box sx={{ display: "flex" }}>
+              <Box sx={{ width: "108px", marginRight: "10px" }}>
+                <Button
+                  text={"Bəli"}
+                  variant="outlined"
+                  onClick={(e) => handleDeleteItem(deletePopupOpen.itemId)}
+                  radius={"8px"}
+                />
+              </Box>
+              <Box sx={{ width: "108px" }}>
+                <Button
+                  text={"Xeyir"}
+                  onClick={(e) =>
+                    setDeletePopupOpen({ isDelete: false, itemId: null })
+                  }
+                  radius={"8px"}
+                  style={{
+                    background: "#fff",
+                    color: "#75787b",
+                    border: "1px solid #B1B3B3",
+                    padding: "5px 40px",
+                    borderRadius: "8px",
+                    fontSize: "16px",
+                    cursor: "pointer",
+                  }}
+                />
+              </Box>
+            </Box>
+          </Box>
+        </Modal>
+      ) : null}
+
       <Typography
         fontFamily={"Regular"}
         fontSize={"16px"}
@@ -160,6 +308,7 @@ const DocumentBoard = () => {
         onPageSizeChange={(newPageSize) => setPageSize(newPageSize)}
         experimentalFeatures={{ newEditingApi: true }}
       />
+      {/* <Pagination count={10} variant="outlined" shape="rounded" /> */}
     </Box>
   );
 };
