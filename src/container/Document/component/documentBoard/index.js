@@ -1,5 +1,5 @@
-import React, { useCallback, useState } from "react";
-import { Box, Typography } from "@mui/material";
+import React, { useCallback, useEffect, useMemo, useState } from "react";
+import { Box, Input, Typography } from "@mui/material";
 import { DataGrid } from "@mui/x-data-grid";
 import { Button, Modal } from "../../../../components";
 import { Icon } from "../../../../assets/icons";
@@ -7,6 +7,7 @@ import {
   useGetDocumentsQuery,
   useDeleteDocumentMutation,
 } from "../../../../services/document";
+import { useNavigate } from "react-router-dom";
 const DataGridSx = {
   border: "none",
   height: "421px",
@@ -131,62 +132,69 @@ const DocumentBoard = () => {
     isDelete: false,
     itemId: null,
   });
-  const [rows, setRows] = useState(data || []);
+  const [rows, setRows] = useState([]);
 
-  const [columns, setColumns] = useState([
-    {
-      field: "No",
-      headerName: "No",
-      sortable: false,
-      width: 100,
-    },
-    {
-      field: "documentName",
-      headerName: "Sənədin adı",
-      sortable: false,
-      width: 280,
-    },
-    {
-      field: "fileLength",
-      headerName: "File uzantısı",
-      sortable: false,
-      width: 210,
-    },
-    {
-      field: "size",
-      headerName: "Həcmi",
-      sortable: false,
-      width: 215,
-    },
-    {
-      field: "postDate",
-      headerName: "Yerləşdirilmə tarixi",
-      type: "dateTime",
-      sortable: false,
-      width: 220,
-    },
-    {
-      field: "actions",
-      headerName: "",
-      renderCell: (row) => (
-        <Box sx={{ display: "flex", alignItems: "center", gap: 3 }}>
-          <Box sx={{ cursor: "pointer" }}>
-            <Icon name={"edit"} color={"#ffb500"} />
+  const navigate = useNavigate();
+  const columns = useMemo(
+    () => [
+      {
+        field: "No",
+        headerName: "No",
+        sortable: false,
+        width: 100,
+      },
+      {
+        field: "documentName",
+        headerName: "Sənədin adı",
+        sortable: false,
+        width: 280,
+      },
+      {
+        field: "fileLength",
+        headerName: "File uzantısı",
+        sortable: false,
+        width: 210,
+      },
+      {
+        field: "size",
+        headerName: "Həcmi",
+        sortable: false,
+        width: 215,
+      },
+      {
+        field: "postDate",
+        headerName: "Yerləşdirilmə tarixi",
+        type: "dateTime",
+        sortable: false,
+        width: 220,
+      },
+      {
+        field: "actions",
+        headerName: "",
+        renderCell: (row) => (
+          <Box sx={{ display: "flex", alignItems: "center", gap: 3 }}>
+            <Box
+              sx={{ cursor: "pointer" }}
+              onClick={() => navigate(`/document/${row.id}`)}
+            >
+              <Icon name={"edit"} color={"#ffb500"} />
+            </Box>
+            <Box
+              sx={{ cursor: "pointer" }}
+              onClick={() =>
+                setDeletePopupOpen({ isDelete: true, itemId: row.id })
+              }
+            >
+              <Icon name={"delete"} />
+            </Box>
           </Box>
-          <Box
-            sx={{ cursor: "pointer" }}
-            onClick={() =>
-              setDeletePopupOpen({ isDelete: true, itemId: row.id })
-            }
-          >
-            <Icon name={"delete"} />
-          </Box>
-        </Box>
-      ),
-      sortable: false,
-      width: 100,
-    },
-  ]);
+        ),
+        sortable: false,
+        width: 100,
+      },
+    ],
+    []
+  );
 
   const handleDeleteItem = useCallback(
     (id) => {
@@ -197,6 +205,12 @@ const DocumentBoard = () => {
     [deletePopupOpen]
   );
 
+  const [searchTerm, setSearchTerm] = useState("");
+  useEffect(() => {
+    if (searchTerm)
+      setRows(data.filter((row) => row.documentName.includes(searchTerm)));
+    else setRows(data);
+  }, [searchTerm]);
   return (
     <Box
       sx={{
@@ -292,9 +306,14 @@ const DocumentBoard = () => {
             padding={"2px 5px"}
             radius={"12px"}
             startIcon={<Icon name="add" />}
+            onClick={() => navigate(`/document/add`)}
           />
         </Box>
-        <div>search input</div>
+        <Input
+          value={searchTerm}
+          onChange={(e) => setSearchTerm(e.target.value)}
+          placeholder={"Axtarış..."}
+        />
       </Box>
       <DataGrid
         sx={DataGridSx}
@@ -307,6 +326,7 @@ const DocumentBoard = () => {
         onPageChange={(newPage) => setPage(newPage)}
         onPageSizeChange={(newPageSize) => setPageSize(newPageSize)}
         experimentalFeatures={{ newEditingApi: true }}
+        disableColumnMenu={true}
       />
       {/* <Pagination count={10} variant="outlined" shape="rounded" /> */}
     </Box>

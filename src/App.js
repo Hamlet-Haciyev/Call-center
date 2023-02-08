@@ -13,7 +13,7 @@ import User from "./container/User";
 import Login from "./container/Login";
 import Accountability from "./container/Accountability";
 import NotFound from "./container/404NotFound";
-function App() {
+const App = () => {
   return (
     <Router>
       <ThemeProvider theme={themeSetting}>
@@ -21,6 +21,11 @@ function App() {
           <Route element={<Layout />}>
             <Route path="/" element={<Navigate to={"/user"} />} />
             <Route path="/document" element={<Document />} />
+            <Route path="/document/add" element={<div>add document</div>} />
+            <Route
+              path="/document/:id"
+              element={<div>edit document</div>}
+            />
             <Route path="/setting" element={<Setting />} />
             <Route path="/user" element={<User />} />
             <Route path="/accountability" element={<Accountability />} />
@@ -31,6 +36,6 @@ function App() {
       </ThemeProvider>
     </Router>
   );
-}
+};
 
 export default App;
