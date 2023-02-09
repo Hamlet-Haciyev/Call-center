@@ -7,6 +7,7 @@ const documentAPI = createApi({
   endpoints: (builder) => ({
     getDocuments: builder.query({
       query: () => "/documents",
+      transformResponse: (response, meta, arg) => console.log(response.data),
     }),
     getDocument: builder.query({
       query: (id) => `/documents/${id}`,

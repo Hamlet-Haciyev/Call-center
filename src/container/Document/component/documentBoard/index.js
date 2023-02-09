@@ -1,7 +1,7 @@
 import React, { useCallback, useEffect, useMemo, useState } from "react";
-import { Box, Input, Typography } from "@mui/material";
+import { Box, Typography } from "@mui/material";
 import { DataGrid } from "@mui/x-data-grid";
-import { Button, Modal } from "../../../../components";
+import { Button, Modal, SearchInput, Pagination } from "../../../../components";
 import { Icon } from "../../../../assets/icons";
 import {
   useGetDocumentsQuery,
@@ -10,7 +10,7 @@ import {
 import { useNavigate } from "react-router-dom";
 const DataGridSx = {
   border: "none",
-  height: "421px",
+  height: "370px",
   "& .MuiDataGrid-columnHeaders": {
     padding: "0px 23px",
   },
@@ -46,10 +46,14 @@ const DataGridSx = {
   "& .MuiDataGrid-columnSeparator": {
     visibility: "hidden",
   },
+  "& .MuiDataGrid-virtualScrollerRenderZone": {
+    width: "100%",
+  },
 };
 
 const DocumentBoard = () => {
-  const {
+  const navigate = useNavigate();
+  let {
     data = [
       {
         id: 1,
@@ -121,20 +125,58 @@ const DocumentBoard = () => {
         size: "25KB",
         postDate: "2.09.2023",
       },
+      {
+        id: 11,
+        documentName: "Qalıq kartı",
+        fileLength: ".pdf",
+        size: "25KB",
+        postDate: "2.09.2023",
+      },
+      {
+        id: 12,
+        documentName: "Qalıq kartı",
+        fileLength: ".pdf",
+        size: "25KB",
+        postDate: "2.09.2023",
+      },
+      {
+        id: 13,
+        documentName: "Qalıq kartı",
+        fileLength: ".pdf",
+        size: "25KB",
+        postDate: "2.09.2023",
+      },
+      {
+        id: 14,
+        documentName: "Qalıq kartı",
+        fileLength: ".pdf",
+        size: "25KB",
+        postDate: "2.09.2023",
+      },
+      {
+        id: 15,
+        documentName: "Qalıq kartı",
+        fileLength: ".pdf",
+        size: "25KB",
+        postDate: "2.09.2023",
+      },
     ],
     isLoading,
     error,
   } = useGetDocumentsQuery();
+
   const [deleteDocument, response] = useDeleteDocumentMutation();
-  const [page, setPage] = useState(0);
-  const [pageSize, setPageSize] = useState(6);
+  const [page, setPage] = useState(1);
+  const [searchTerm, setSearchTerm] = useState("");
+  const pageSize = useMemo(() => 6, []);
+
   const [deletePopupOpen, setDeletePopupOpen] = useState({
     isDelete: false,
     itemId: null,
   });
+
   const [rows, setRows] = useState([]);
 
-  const navigate = useNavigate();
   const columns = useMemo(
     () => [
       {
@@ -190,7 +232,7 @@ const DocumentBoard = () => {
           </Box>
         ),
         sortable: false,
-        width: 100,
+        width: 90,
       },
     ],
     []
@@ -199,25 +241,37 @@ const DocumentBoard = () => {
   const handleDeleteItem = useCallback(
     (id) => {
       deleteDocument(id);
-      setRows(data.filter((row) => row.id !== id));
+      setRows(rows.filter((row) => row.id !== id));
       setDeletePopupOpen({ isDelete: false, itemId: null });
     },
     [deletePopupOpen]
   );
 
-  const [searchTerm, setSearchTerm] = useState("");
+  const showDataSlice = useCallback(() => {
+    return rows.slice((page - 1) * pageSize, page * pageSize);
+  }, [rows, page]);
+
   useEffect(() => {
+    data = data.map((item, index) => {
+      return { ...item, No: ++index };
+    });
     if (searchTerm)
       setRows(data.filter((row) => row.documentName.includes(searchTerm)));
-    else setRows(data);
+    else setRows(data.map((item, index) => {
+      return { ...item, No: ++index };
+    }));
   }, [searchTerm]);
+
   return (
     <Box
       sx={{
         background: "#fff",
         borderRadius: "12px",
-        overflow: "hidden",
         mb: "20px",
+        overflow: "hidden",
+        "&  .MuiDataGrid-footerContainer": {
+          display: "none",
+        },
       }}
     >
       {deletePopupOpen.isDelete ? (
@@ -306,10 +360,10 @@ const DocumentBoard = () => {
             padding={"2px 5px"}
             radius={"12px"}
             startIcon={<Icon name="add" />}
-            onClick={() => navigate(`/document/add`)}
+            onClick={() => navigate(`add`)}
           />
         </Box>
-        <Input
+        <SearchInput
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
           placeholder={"Axtarış..."}
@@ -317,18 +371,30 @@ const DocumentBoard = () => {
       </Box>
       <DataGrid
         sx={DataGridSx}
-        rows={rows}
+        rows={showDataSlice()}
         columns={columns}
-        rowsPerPageOptions={[6]}
-        pagination
-        page={page}
-        pageSize={pageSize}
-        onPageChange={(newPage) => setPage(newPage)}
-        onPageSizeChange={(newPageSize) => setPageSize(newPageSize)}
         experimentalFeatures={{ newEditingApi: true }}
         disableColumnMenu={true}
       />
-      {/* <Pagination count={10} variant="outlined" shape="rounded" /> */}
+      <Box
+        sx={{
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "space-between",
+          width: "100%",
+          padding: "10px 30px",
+        }}
+      >
+        <Typography component={"span"} color={"#75787B"}>
+          {rows.length} sənədin {showDataSlice().length}-sı göstərilir
+        </Typography>
+        <Pagination
+          onChange={(e, page) => setPage(page)}
+          count={Math.ceil(rows.length / pageSize)}
+          variant="outlined"
+          shape="rounded"
+        />
+      </Box>
     </Box>
   );
 };
