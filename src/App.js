@@ -13,6 +13,8 @@ import User from "./container/User";
 import Login from "./container/Login";
 import Accountability from "./container/Accountability";
 import NotFound from "./container/404NotFound";
+import Add from "./container/Document/component/Board/Add";
+import Edit from "./container/Document/component/Board/Edit";
 const App = () => {
   return (
     <Router>
@@ -21,11 +23,8 @@ const App = () => {
           <Route element={<Layout />}>
             <Route path="/" element={<Navigate to={"/user"} />} />
             <Route path="/document" element={<Document />} />
-            <Route path="/document/add" element={<div>add document</div>} />
-            <Route
-              path="/document/:id"
-              element={<div>edit document</div>}
-            />
+            <Route path="/document/add" element={<Add />} />
+            <Route path="/document/:id" element={<Edit />} />
             <Route path="/setting" element={<Setting />} />
             <Route path="/user" element={<User />} />
             <Route path="/accountability" element={<Accountability />} />

@@ -51,7 +51,7 @@ const DataGridSx = {
   },
 };
 
-const DocumentBoard = () => {
+const Board = () => {
   const navigate = useNavigate();
   let {
     data = [
@@ -176,7 +176,6 @@ const DocumentBoard = () => {
   });
 
   const [rows, setRows] = useState([]);
-
   const columns = useMemo(
     () => [
       {
@@ -367,6 +366,7 @@ const DocumentBoard = () => {
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
           placeholder={"Axtarış..."}
+          startAdornment={<Icon name={"search"}/>}
         />
       </Box>
       <DataGrid
@@ -399,4 +399,4 @@ const DocumentBoard = () => {
   );
 };
 
-export default DocumentBoard;
+export default Board;

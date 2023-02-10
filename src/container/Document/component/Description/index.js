@@ -2,7 +2,7 @@ import React from "react";
 import { Box, ThemeProvider, Typography } from "@mui/material";
 import { Button } from "../../../../components";
 import { Icon } from "../../../../assets/icons";
-const DescriptionDocument = () => {
+const Description = () => {
   return (
     <Box
       sx={{
@@ -46,4 +46,4 @@ const DescriptionDocument = () => {
   );
 };
 
-export default DescriptionDocument;
+export default Description;

@@ -8,6 +8,8 @@ const SearchInput = ({ ...props }) => {
           root: {
             border: "1px solid #B1B3B3",
             borderRadius: "16px",
+            padding: "1px 20px 2px",
+
             "&::before": {
               borderBottom: "none",
             },
@@ -20,8 +22,8 @@ const SearchInput = ({ ...props }) => {
             "& input": {
               fontFamily: "Regular",
               color: "#75787B",
-              padding: "1px 20px 2px",
               fontSize: "15px",
+              padding: "0px 5px 0px",
             },
             "& input::placeHolder": {
               fontSize: "12px",
