@@ -133,6 +133,7 @@ const DeleteAccount = () => {
                 variant="outlined"
                 value={values.message}
                 onChange={handleChange}
+                heightTextArea="114px"
                 error={touched.message && Boolean(errors.message)}
                 helperText={touched.message && errors.message}
                 fullWidth

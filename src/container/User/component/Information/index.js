@@ -236,6 +236,7 @@ const Information = () => {
                   variant="outlined"
                   value={values.message}
                   onChange={handleChange}
+                  heightTextArea="130px"
                   error={touched.message && Boolean(errors.message)}
                   helperText={touched.message && errors.message}
                   fullWidth

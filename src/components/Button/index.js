@@ -1,7 +1,7 @@
 import React from "react";
 import { Button as MuiButton, createTheme, ThemeProvider } from "@mui/material";
 
-const Button = ({ text, radius = "12px", padding, ...props }) => {
+const Button = ({ text, radius = "12px", padding, children, ...props }) => {
   const themeButton = createTheme({
     components: {
       MuiButton: {
@@ -27,7 +27,7 @@ const Button = ({ text, radius = "12px", padding, ...props }) => {
   });
   return (
     <ThemeProvider theme={themeButton}>
-      <MuiButton {...props}>{text}</MuiButton>
+      <MuiButton {...props}>{text}{children}</MuiButton>
     </ThemeProvider>
   );
 };

@@ -256,9 +256,12 @@ const Board = () => {
     });
     if (searchTerm)
       setRows(data.filter((row) => row.documentName.includes(searchTerm)));
-    else setRows(data.map((item, index) => {
-      return { ...item, No: ++index };
-    }));
+    else
+      setRows(
+        data.map((item, index) => {
+          return { ...item, No: ++index };
+        })
+      );
   }, [searchTerm]);
 
   return (
@@ -266,7 +269,6 @@ const Board = () => {
       sx={{
         background: "#fff",
         borderRadius: "12px",
-        mb: "20px",
         overflow: "hidden",
         "&  .MuiDataGrid-footerContainer": {
           display: "none",
@@ -366,35 +368,37 @@ const Board = () => {
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
           placeholder={"Axtarış..."}
-          startAdornment={<Icon name={"search"}/>}
+          startAdornment={<Icon name={"search"} />}
         />
       </Box>
       <DataGrid
         sx={DataGridSx}
-        rows={showDataSlice()}
+        rows={searchTerm ? showDataSlice() : []}
         columns={columns}
         experimentalFeatures={{ newEditingApi: true }}
         disableColumnMenu={true}
       />
-      <Box
-        sx={{
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "space-between",
-          width: "100%",
-          padding: "10px 30px",
-        }}
-      >
-        <Typography component={"span"} color={"#75787B"}>
-          {rows.length} sənədin {showDataSlice().length}-sı göstərilir
-        </Typography>
-        <Pagination
-          onChange={(e, page) => setPage(page)}
-          count={Math.ceil(rows.length / pageSize)}
-          variant="outlined"
-          shape="rounded"
-        />
-      </Box>
+      {searchTerm ? (
+        <Box
+          sx={{
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "space-between",
+            width: "100%",
+            padding: "15px 30px",
+          }}
+        >
+          <Typography component={"span"} color={"#75787B"}>
+            {rows.length} sənədin {showDataSlice().length}-sı göstərilir
+          </Typography>
+          <Pagination
+            onChange={(e, page) => setPage(page)}
+            count={Math.ceil(rows.length / pageSize)}
+            variant="outlined"
+            shape="rounded"
+          />
+        </Box>
+      ) : null}
     </Box>
   );
 };
