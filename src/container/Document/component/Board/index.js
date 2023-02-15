@@ -10,7 +10,6 @@ import {
 import { useNavigate } from "react-router-dom";
 const DataGridSx = {
   border: "none",
-  height: "370px",
   "& .MuiDataGrid-columnHeaders": {
     padding: "0px 23px",
   },
@@ -26,6 +25,7 @@ const DataGridSx = {
     fontFamily: "Regular",
     fontSize: "16px",
     color: "#63666A",
+    height: "53px",
     border: "none",
   },
   "& .MuiDataGrid-cell:focus": {
@@ -51,7 +51,7 @@ const DataGridSx = {
   },
 };
 
-const Board = () => {
+const Board = ({ setSelectedFile }) => {
   const navigate = useNavigate();
   let {
     data = [
@@ -256,12 +256,10 @@ const Board = () => {
     });
     if (searchTerm)
       setRows(data.filter((row) => row.documentName.includes(searchTerm)));
-    else
-      setRows(
-        data.map((item, index) => {
-          return { ...item, No: ++index };
-        })
-      );
+    else setRows([]);
+    if (!searchTerm) {
+      setSelectedFile(null);
+    }
   }, [searchTerm]);
 
   return (
@@ -377,8 +375,12 @@ const Board = () => {
         columns={columns}
         experimentalFeatures={{ newEditingApi: true }}
         disableColumnMenu={true}
+        autoHeight={true}
+        onRowClick={(e) => {
+          setSelectedFile(e.id);
+        }}
       />
-      {searchTerm ? (
+      {rows.length > 6 ? (
         <Box
           sx={{
             display: "flex",
@@ -389,7 +391,7 @@ const Board = () => {
           }}
         >
           <Typography component={"span"} color={"#75787B"}>
-            {rows.length} sənədin {showDataSlice().length}-sı göstərilir
+            {showDataSlice().length} of {rows.length}
           </Typography>
           <Pagination
             onChange={(e, page) => setPage(page)}

@@ -21,12 +21,12 @@ const Document = () => {
         sx={{
           backgroundColor: "#f5f5f5",
           p: "36px 42px 36px 42px",
-          minHeight:`${"calc(100vh - 60px)"}`
+          minHeight: `${"calc(100vh - 60px)"}`,
         }}
       >
         <Grid container spacing={3}>
           <Grid item mobile={12} tablet={12} desktop={12}>
-            <Board />
+            <Board setSelectedFile={setSelectedFile} />
           </Grid>
           {selectedFile ? (
             <>
