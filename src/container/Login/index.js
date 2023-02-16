@@ -9,7 +9,8 @@ import {
 import { Formik, Form } from "formik";
 import login from "../../assets/images/login.png";
 import { Button, TextField } from "../../components";
-import { Navigate, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import { useGetUserQuery } from "../../services/auth";
 const LoginTheme = createTheme({
   breakpoints: {
     values: {
@@ -20,11 +21,13 @@ const LoginTheme = createTheme({
     },
   },
 });
-const Login = () => {
-  const user = {
-    username: "hamlet.haciyev",
-    password: "123456",
-  };
+const Login = ({ setUser }) => {
+  const {
+    data: user,
+    isLoading,
+    error,
+  } = useGetUserQuery({ username: "hamlet.haciyev", password: "123456" });
+  const { data: users } = useGetUserQuery();
   const navigate = useNavigate();
 
   if (localStorage.getItem("user")) {
@@ -33,16 +36,8 @@ const Login = () => {
 
   const handleLogin = async (values) => {
     try {
-      const userInfo = await user;
-      if (
-        userInfo.username == values.username &&
-        userInfo.password == values.password
-      ) {
-        localStorage.setItem("user", JSON.stringify(userInfo));
-        navigate("/user");
-      } else {
-        alert("Username or password incorrect");
-      }
+      console.log(values);
+      console.log(users);
     } catch (error) {
       console.log(error);
     }
@@ -148,7 +143,7 @@ const Login = () => {
           }}
         >
           <Box>
-            <img src={login} style={{ maxWidth: "100%", objectFit: "cover" }} />
+            <img src={login} style={{ maxWidth: "100%" }} />
           </Box>
         </Grid>
       </Grid>

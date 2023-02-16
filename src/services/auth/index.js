@@ -1,5 +1,4 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
-import { setCredentials, logout } from "../../store/auth";
 
 const baseQuery = fetchBaseQuery({
   baseUrl: "http://localhost:3500",
@@ -19,26 +18,31 @@ const baseQueryWithReauth = async (args, api, extraOptions) => {
     console.log("sending refresh token");
     const refreshResult = await baseQuery("/refresh", api, extraOptions);
     console.log(refreshResult);
-    if (refreshResult?.data) {
-      const user = api.getState().auth.user;
-      api.dispatch(setCredentials({ ...refreshResult.data, user }));
-      result = await baseQuery(args, api, extraOptions);
-    } else {
-      api.dispatch(logout());
-    }
   }
 };
 
-export const authApi = createApi({
+const authAPI = createApi({
   baseQuery: baseQueryWithReauth,
+  tagTypes: "Users",
   endpoints: (builder) => ({
     login: builder.mutation({
       query: (credentials) => ({
-        url: "/auth",
+        url: "/login",
         method: "POST",
         body: { ...credentials },
       }),
     }),
+    getUsers: builder.query({
+      query: () => "/users",
+    }),
+    getUser: builder.query({
+      query: (user) => ({
+        url: `/users/${user.username}`,
+        method: "GET",
+      }),
+      invalidatesTags: ["Users"],
+    }),
   }),
 });
-export const { useLoginMutation } = authApi;
+export const { useLoginMutation, useGetUsersQuery, useGetUserQuery } = authAPI;
+export default authAPI;

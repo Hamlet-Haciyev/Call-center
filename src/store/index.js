@@ -1,16 +1,13 @@
-import { configureStore, getDefaultMiddleware } from "@reduxjs/toolkit";
-// import documentReducer from "./document";
+import { configureStore } from "@reduxjs/toolkit";
+import authAPI  from "../services/auth";
 import documentAPI from "../services/document";
 export const store = configureStore({
   reducer: {
-    // document: documentReducer,
     [documentAPI.reducerPath]: documentAPI.reducer,
+    [authAPI.reducerPath]: authAPI.reducer,
   },
   middleware: (getDefaultMiddleware) =>
-    getDefaultMiddleware({}).concat([documentAPI.middleware]),
-  // middleware: [
-  //   ...getDefaultMiddleware({
-  //     serializableCheck: false,
-  //   }),
-  // ],
+    getDefaultMiddleware({})
+      .concat([documentAPI.middleware])
+      .concat([authAPI.middleware]),
 });
