@@ -1,5 +1,12 @@
 import React from "react";
-import { Box, createTheme, Tab, Tabs, ThemeProvider } from "@mui/material";
+import {
+  Box,
+  createTheme,
+  Grid,
+  Tab,
+  Tabs,
+  ThemeProvider,
+} from "@mui/material";
 import TableCredit from "./table/credit";
 import CardCredit from "./table/cardCredit";
 import CurrentAccount from "./table/currentAccount";
@@ -85,45 +92,46 @@ const Credit = () => {
   };
   return (
     <ThemeProvider theme={themeTabs}>
-      <div
-        style={{
-          marginTop: "10px",
-          background: "#fff",
-          borderRadius: "12px",
-          overflow: "hidden",
-        }}
+      <Grid
+        container
+        marginTop="10px"
+        backgroundColor="#fff"
+        borderRadius="12px"
+        maxWidth="1455px"
+        overflow="hidden"
       >
-        <Box
-          sx={{
-            borderBottom: 1,
-            borderColor: "#E1E1E1",
-            maxHeight: "100%",
-          }}
-        >
-          <Tabs value={value} onChange={handleChange}>
-            <Tab label="Kredit" {...a11yProps(0)} />
-            <Tab label="Kart Krediti" {...a11yProps(1)} />
-            <Tab label="Əmanət" {...a11yProps(2)} />
-            <Tab label="Bank Kartı" {...a11yProps(3)} />
-            <Tab label="Cari Hesab" {...a11yProps(4)} />
-          </Tabs>
-        </Box>
-        <TabPanel value={value} index={0}>
-          <TableCredit />
-        </TabPanel>
-        <TabPanel value={value} index={1}>
-          <CardCredit />
-        </TabPanel>
-        <TabPanel value={value} index={2}>
-          <Deposit />
-        </TabPanel>
-        <TabPanel value={value} index={3}>
-          <BankCard />
-        </TabPanel>
-        <TabPanel value={value} index={4}>
-          <CurrentAccount />
-        </TabPanel>
-      </div>
+        <Grid item xs={12} sm={12} lg={12}>
+          <Box
+            sx={{
+              borderBottom: 1,
+              borderColor: "#E1E1E1",
+            }}
+          >
+            <Tabs value={value} onChange={handleChange}>
+              <Tab label="Kredit" {...a11yProps(0)} />
+              <Tab label="Kart Krediti" {...a11yProps(1)} />
+              <Tab label="Əmanət" {...a11yProps(2)} />
+              <Tab label="Bank Kartı" {...a11yProps(3)} />
+              <Tab label="Cari Hesab" {...a11yProps(4)} />
+            </Tabs>
+          </Box>
+          <TabPanel value={value} index={0}>
+            <TableCredit />
+          </TabPanel>
+          <TabPanel value={value} index={1}>
+            <CardCredit />
+          </TabPanel>
+          <TabPanel value={value} index={2}>
+            <Deposit />
+          </TabPanel>
+          <TabPanel value={value} index={3}>
+            <BankCard />
+          </TabPanel>
+          <TabPanel value={value} index={4}>
+            <CurrentAccount />
+          </TabPanel>
+        </Grid>
+      </Grid>
     </ThemeProvider>
   );
 };

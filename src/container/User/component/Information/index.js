@@ -72,6 +72,7 @@ const Information = () => {
         background: "#fff",
         borderRadius: "12px",
         padding: "27px 25px",
+        maxWidth: "827px",
       }}
     >
       <Typography

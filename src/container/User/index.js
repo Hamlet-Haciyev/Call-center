@@ -8,10 +8,10 @@ const User = () => {
   const breakPoints = createTheme({
     breakpoints: {
       values: {
+        desktop: 1280,
         laptop: 1200,
         tablet: 640,
         mobile: 0,
-        desktop: 1280,
       },
     },
   });
@@ -19,10 +19,10 @@ const User = () => {
     <ThemeProvider theme={breakPoints}>
       <Box sx={{ backgroundColor: "#f5f5f5", p: "36px 42px 36px 42px" }}>
         <Grid container spacing={3}>
-          <Grid item mobile={12} tablet={6} desktop={8}>
+          <Grid item mobile={12} tablet={8} desktop={8}>
             <Information />
           </Grid>
-          <Grid item mobile={12} tablet={6} desktop={4}>
+          <Grid item mobile={12} tablet={4} desktop={4}>
             <SelectAction />
           </Grid>
           <Grid item mobile={12} tablet={12} desktop={12}>

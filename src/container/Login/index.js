@@ -10,7 +10,6 @@ import { Formik, Form } from "formik";
 import login from "../../assets/images/login.png";
 import { Button, TextField } from "../../components";
 import { useNavigate } from "react-router-dom";
-import { useGetUserQuery } from "../../services/auth";
 const LoginTheme = createTheme({
   breakpoints: {
     values: {
@@ -22,12 +21,10 @@ const LoginTheme = createTheme({
   },
 });
 const Login = ({ setUser }) => {
-  const {
-    data: user,
-    isLoading,
-    error,
-  } = useGetUserQuery({ username: "hamlet.haciyev", password: "123456" });
-  const { data: users } = useGetUserQuery();
+  const user = {
+    username: "hamlet.haciyev",
+    password: "123456",
+  };
   const navigate = useNavigate();
 
   if (localStorage.getItem("user")) {
@@ -36,8 +33,16 @@ const Login = ({ setUser }) => {
 
   const handleLogin = async (values) => {
     try {
-      console.log(values);
-      console.log(users);
+      if (
+        values.username == user.username &&
+        values.password == user.password
+      ) {
+        setUser({ username: values.username, password: values.password });
+        localStorage.setItem("user", JSON.stringify(values, null, 2));
+        navigate("/user");
+      } else {
+        alert("Username or password incorrect");
+      }
     } catch (error) {
       console.log(error);
     }
@@ -62,6 +67,28 @@ const Login = ({ setUser }) => {
           }}
         >
           <Box>
+            <Box sx={{ marginBottom: "25px" }}>
+              <Typography
+                component={"h2"}
+                fontFamily={"Regular"}
+                color="#FFA300"
+                fontSize="32px"
+                fontWeight={"600"}
+                lineHeight={"39px"}
+                marginBottom="10px"
+              >
+                Expressbank callcenter
+              </Typography>
+              <Typography
+                component={"h4"}
+                fontFamily={"Regular"}
+                color="#75787B"
+                fontSize="16px"
+                lineHeight={"19px"}
+              >
+                İstifadəçi adı və kodu ilə daxil olun.
+              </Typography>
+            </Box>
             <Formik
               initialValues={{
                 username: "",
@@ -69,66 +96,41 @@ const Login = ({ setUser }) => {
               }}
               onSubmit={(values) => {
                 handleLogin(values);
-                // alert(JSON.stringify(values));
               }}
             >
               {({ values, errors, touched, setFieldValue, handleChange }) => (
-                <>
-                  <Form>
-                    <Box sx={{ marginBottom: "25px" }}>
-                      <Typography
-                        component={"h2"}
-                        fontFamily={"Regular"}
-                        color="#FFA300"
-                        fontSize="32px"
-                        fontWeight={"600"}
-                        lineHeight={"39px"}
-                        marginBottom="10px"
-                      >
-                        Expressbank callcenter
-                      </Typography>
-                      <Typography
-                        component={"h4"}
-                        fontFamily={"Regular"}
-                        color="#75787B"
-                        fontSize="16px"
-                        lineHeight={"19px"}
-                      >
-                        İstifadəçi adı və kodu ilə daxil olun.
-                      </Typography>
-                    </Box>
-                    <Box marginBottom={"20px"}>
-                      <TextField
-                        label="Istifadəçi adı"
-                        id="username"
-                        name="username"
-                        value={values.username}
-                        onChange={handleChange}
-                        style={{ width: "100%" }}
-                      />
-                    </Box>
-                    <Box marginBottom={"30px"}>
-                      <TextField
-                        type="password"
-                        label="Kod"
-                        id="password"
-                        name="password"
-                        value={values.password}
-                        onChange={handleChange}
-                        style={{ width: "100%" }}
-                      />
-                    </Box>
-                    <Box width={"123px"}>
-                      <Button
-                        type="submit"
-                        text={"Daxil ol"}
-                        radius={"12px"}
-                        style={{ textTransform: "initial" }}
-                        padding="5px 20px"
-                      />
-                    </Box>
-                  </Form>
-                </>
+                <Form>
+                  <Box marginBottom={"20px"}>
+                    <TextField
+                      label="Istifadəçi adı"
+                      id="username"
+                      name="username"
+                      value={values.username}
+                      onChange={handleChange}
+                      style={{ width: "100%" }}
+                    />
+                  </Box>
+                  <Box marginBottom={"30px"}>
+                    <TextField
+                      type="password"
+                      label="Kod"
+                      id="password"
+                      name="password"
+                      value={values.password}
+                      onChange={handleChange}
+                      style={{ width: "100%" }}
+                    />
+                  </Box>
+                  <Box width={"123px"}>
+                    <Button
+                      type="submit"
+                      text={"Daxil ol"}
+                      radius={"12px"}
+                      style={{ textTransform: "initial" }}
+                      padding="5px 20px"
+                    />
+                  </Box>
+                </Form>
               )}
             </Formik>
           </Box>

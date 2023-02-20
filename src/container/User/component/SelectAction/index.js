@@ -23,6 +23,7 @@ const SelectAction = () => {
         borderRadius: "12px",
         background: "#fff",
         padding: "20px 24px",
+        maxWidth: "400px",
       }}
     >
       <Box display={"flex"} alignItems={"center"} mb="20px">

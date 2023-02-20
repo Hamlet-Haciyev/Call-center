@@ -10,7 +10,7 @@ const Navbar = () => {
     <AppBar
       position="static"
     >
-      <Container maxWidth="xl">
+      <Container maxWidth="1200px">
         <Toolbar disableGutters sx={{ justifyContent: "space-between" }}>
           <Box>
             <Typography
