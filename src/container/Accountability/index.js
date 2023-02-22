@@ -4,13 +4,13 @@ import {
   Box,
   Tabs,
   Tab,
-  Typography,
   ThemeProvider,
   createTheme,
 } from "@mui/material";
 import Operation from "./component/Operation";
 import Credit from "./component/Credit";
 import SearchNumber from "./component/SearchNumber";
+import SearchSMSNumber from "./component/SearchSMSNumber";
 const TabPanel = (props) => {
   const { children, value, index, ...other } = props;
 
@@ -44,6 +44,8 @@ const Accountability = () => {
             alignItems: "start",
             textTransform: "capitalize",
             fontSize: "15px",
+            padding:"5px 35px",
+            marginBottom:"4px",
             "&.Mui-selected": {
               color: "#FFA300",
               backgroundColor: "#FFFBF3",
@@ -61,19 +63,25 @@ const Accountability = () => {
   return (
     <ThemeProvider theme={AccountabilityTheme}>
       <Box sx={{ backgroundColor: "#F5F5F5", minHeight: "calc(100vh - 60px)" }}>
-        <Grid container padding={"24px 41px"} columnSpacing={4}>
-          <Grid item xs={3}>
+        <Grid container padding={"34px 41px"} columnSpacing={4}>
+          <Grid item lg={3} md={12}>
             <Box
               sx={{
                 padding: "20px 18.5px",
                 backgroundColor: "#fff",
                 borderRadius: "12px",
+                marginBottom:"20px"
               }}
             >
               <Tabs
                 orientation="vertical"
                 value={value}
                 onChange={handleChange}
+                sx={{
+                  "& .MuiTabs-indicator": {
+                    backgroundColor: "transparent !important",
+                  },
+                }}
               >
                 <Tab label="Operations" />
                 <Tab label="Kredit" />
@@ -89,7 +97,7 @@ const Accountability = () => {
               </Tabs>
             </Box>
           </Grid>
-          <Grid item xs={9}>
+          <Grid item lg={9} md={12}>
             <TabPanel value={value} index={0}>
               <Operation />
             </TabPanel>
@@ -103,7 +111,7 @@ const Accountability = () => {
               Superviser
             </TabPanel>
             <TabPanel value={value} index={4}>
-              Sms nömrə axtarış
+              <SearchSMSNumber />
             </TabPanel>
             <TabPanel value={value} index={5}>
               <SearchNumber />

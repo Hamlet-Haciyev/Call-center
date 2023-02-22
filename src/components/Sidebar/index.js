@@ -16,7 +16,7 @@ const Sidebar = () => {
   const navigate = useNavigate(null);
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
   const [selectedIndex, setSelectedIndex] = useState(0);
-  
+
   const handleListItemClick = (event, index) => {
     setSelectedIndex(index);
   };
@@ -29,10 +29,11 @@ const Sidebar = () => {
           variant="persistent"
           anchor="left"
           sx={{
+            height: "100%",
             width: drawerWidth,
             "& .MuiDrawer-paper": {
               boxSixing: "border-box",
-              width: drawerWidth,
+              minWidth: drawerWidth,
               justifyContent: "space-between",
             },
           }}
@@ -76,7 +77,9 @@ const Sidebar = () => {
                   sx={{
                     display: "block",
                     borderLeft:
-                      selectedIndex === index ? "3px solid #ffa300" : "3px solid transparent",
+                      selectedIndex === index
+                        ? "3px solid #ffa300"
+                        : "3px solid transparent",
                     mb: "7px",
                   }}
                   onClick={() => navigate(`${to}`)}

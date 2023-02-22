@@ -13,6 +13,7 @@ const DataGridSx = {
   "&": {
     border: "none",
   },
+  
   "& .MuiDataGrid-columnHeaders": {
     backgroundColor: "#FBFBFB",
     padding: "15.5px 15px",
@@ -36,7 +37,16 @@ const DataGridSx = {
       outline: "none",
     },
   },
-
+  ".MuiDataGrid-virtualScroller::-webkit-scrollbar": {
+    height: "8px",
+  },
+  ".MuiDataGrid-virtualScroller::-webkit-scrollbar-track": {
+    background: "#FBFBFB",
+  },
+  ".MuiDataGrid-virtualScroller::-webkit-scrollbar-thumb": {
+    background: "#D9D9D9",
+    borderRadius: "10px",
+  },
   "& .MuiDataGrid-cell": {
     fontFamily: "Regular",
     fontSize: "14px",
@@ -177,9 +187,9 @@ const SearchNumber = () => {
               <Grid
                 container
                 spacing={2}
-                sx={{ display: "flex", marginBottom: "20px" }}
+                sx={{ display: "flex", flexWrap: "wrap", marginBottom: "20px" }}
               >
-                <Grid item sx={{ flex: "1" }}>
+                <Grid item sx={{ flex: "1 1 280px", }}>
                   <TextField
                     id="fullName"
                     name="fullName"
@@ -189,7 +199,7 @@ const SearchNumber = () => {
                     fullWidth
                   />
                 </Grid>
-                <Grid item sx={{ flex: "1" }}>
+                <Grid item sx={{ flex: "1 1 280px" }}>
                   <TextField
                     id="phoneNumber"
                     name="phoneNumber"
@@ -199,11 +209,11 @@ const SearchNumber = () => {
                     fullWidth
                   />
                 </Grid>
-                <Grid item sx={{ flex: "1" }}>
+                <Grid item sx={{ flex: "1 1 280px" }}>
                   <TextField
-                    label="Zəng tarixi"
                     id="callDate"
                     name="callDate"
+                    label="Zəng tarixi"
                     value={values.callDate}
                     onChange={handleChange}
                     fullWidth

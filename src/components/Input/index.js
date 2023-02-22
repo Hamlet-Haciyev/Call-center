@@ -1,6 +1,6 @@
 import React from "react";
 import { createTheme, Input, ThemeProvider } from "@mui/material";
-const SearchInput = ({ ...props }) => {
+const SearchInput = ({ color, height, width, backgroundColor, ...props }) => {
   const InputTheme = createTheme({
     components: {
       MuiInput: {
@@ -9,7 +9,11 @@ const SearchInput = ({ ...props }) => {
             border: "1px solid #B1B3B3",
             borderRadius: "16px",
             padding: "1px 20px 2px",
-
+            backgroundColor,
+            "& svg": {
+              height: "17px",
+              width: "17px",
+            },
             "&::before": {
               borderBottom: "none",
             },
@@ -24,9 +28,12 @@ const SearchInput = ({ ...props }) => {
               color: "#75787B",
               fontSize: "15px",
               padding: "0px 5px 0px",
+              height,
+              width,
             },
             "& input::placeHolder": {
-              fontSize: "12px",
+              fontSize: "14px",
+              color: color,
             },
           },
         },

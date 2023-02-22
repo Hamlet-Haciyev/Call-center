@@ -1,7 +1,11 @@
 import React from "react";
 import { TextField as MuiTextField, ThemeProvider } from "@mui/material";
 import { createTheme } from "@mui/material/styles";
-const TextField = ({ heightTextArea = "70px", ...props }) => {
+const TextField = ({
+  heightTextArea = "70px",
+  borderRadius = "8px",
+  ...props
+}) => {
   const themeTextField = createTheme({
     components: {
       MuiFormControl: {
@@ -41,7 +45,7 @@ const TextField = ({ heightTextArea = "70px", ...props }) => {
             "& .MuiInputBase-input::placeholder": {
               color: "#ffa300 !important",
             },
-            borderRadius: "8px",
+            borderRadius: borderRadius,
             color: "#75787B",
             "& fieldset": {
               borderColor: "#B1B3B3",
