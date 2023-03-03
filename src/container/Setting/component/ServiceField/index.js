@@ -56,7 +56,7 @@ const DataGridSx = {
     width: "100%",
   },
   "& .MuiDataGrid-virtualScrollerContent": {
-    height: "400px !important",
+    height: "350px !important",
   },
   ".MuiDataGrid-virtualScroller::-webkit-scrollbar": {
     height: "8px",
@@ -79,32 +79,47 @@ const ServiceField = () => {
     },
     {
       id: 2,
-      serviceField: "Hökümət ödənişləri",
+      serviceField: "Təhsil",
       postDate: "12.06.2022",
     },
     {
       id: 3,
-      serviceField: "Hökümət ödənişləri",
+      serviceField: "TV & İnternet",
       postDate: "12.06.2022",
     },
     {
       id: 4,
-      serviceField: "Hökümət ödənişləri",
+      serviceField: "Qalıq kartı",
       postDate: "12.06.2022",
     },
     {
       id: 5,
-      serviceField: "Hökümət ödənişləri",
+      serviceField: "Bank xidmətləri",
       postDate: "12.06.2022",
     },
     {
       id: 6,
-      serviceField: "Hökümət ödənişləri",
+      serviceField: "Sığorta",
       postDate: "12.06.2022",
     },
     {
       id: 7,
-      serviceField: "Hökümət ödənişləri",
+      serviceField: "Telefon",
+      postDate: "12.06.2022",
+    },
+    {
+      id: 8,
+      serviceField: "E-pul kisəsi",
+      postDate: "12.06.2022",
+    },
+    {
+      id: 9,
+      serviceField: "",
+      postDate: "12.06.2022",
+    },
+    {
+      id: 10,
+      serviceField: "",
       postDate: "12.06.2022",
     },
   ];
@@ -190,6 +205,7 @@ const ServiceField = () => {
   }, [searchTerm]);
   return (
     <>
+    
       <Box
         sx={{
           background: "#fff",

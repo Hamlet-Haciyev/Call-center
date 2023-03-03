@@ -154,7 +154,7 @@ const Information = () => {
                 <TextField
                   id="phonenumber"
                   name="phonenumber"
-                  label="Number"
+                  label="Əlaqə nömrəsi"
                   placeholder="(+__) __ ___ __ __"
                   variant="outlined"
                   value={values.phonenumber}

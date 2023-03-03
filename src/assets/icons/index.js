@@ -364,6 +364,25 @@ const ReturnBackIcon = () => {
     </svg>
   );
 };
+const DownloadIcon = () => {
+  return (
+    <svg
+      width="24"
+      height="25"
+      viewBox="0 0 24 25"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        d="M3 17V19.25C3 20.4926 4.00736 21.5 5.25 21.5H18.75C19.9926 21.5 21 20.4926 21 19.25V17M16.5 12.5L12 17M12 17L7.5 12.5M12 17V3.5"
+        stroke="#FFA300"
+        strokeWidth="1.5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
+};
 const icons = {
   logo: LogoIcon,
   hamburger: HamburgerIcon,
@@ -381,6 +400,7 @@ const icons = {
   deleteFile: DeleteFileIcon,
   addedFile: AddedFileIcon,
   returnBack: ReturnBackIcon,
+  download: DownloadIcon,
 };
 export const Icon = ({ name, color }) => {
   const Component = icons[name];
