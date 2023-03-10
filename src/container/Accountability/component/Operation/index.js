@@ -78,7 +78,7 @@ const OperationTheme = createTheme({
             },
           },
           "&.MuiPickersDay-root": {
-            margin: "0 -3px",
+            margin: "0 3px",
           },
           "&.MuiPickersDay-root:focus.Mui-selected": {
             backgroundColor: "#FFA300",
@@ -96,6 +96,18 @@ const OperationTheme = createTheme({
           "&.MuiPickersDay-root:not(.Mui-selected)": {
             border: "1px solid transparent",
           },
+        },
+      },
+    },
+    MuiGrid: {
+      styleOverrides: {
+        root: {
+          "& .MuiYearPicker-root .PrivatePickersYear-yearButton.Mui-selected": {
+            backgroundColor: "#FFA300",
+          },
+          "& .MuiFormControl-root": {
+            width: "100%",
+          },
           "& .MuiCalendarOrClockPicker-root > div": {
             width: "100%",
             margin: "0px",
@@ -105,15 +117,6 @@ const OperationTheme = createTheme({
           },
           ".MuiCalendarPicker-root .MuiDayPicker-weekContainer": {
             justifyContent: "space-evenly",
-          },
-        },
-      },
-    },
-    MuiGrid: {
-      styleOverrides: {
-        root: {
-          "& .MuiYearPicker-root .PrivatePickersYear-yearButton.Mui-selected": {
-            backgroundColor: "#FFA300",
           },
         },
       },
@@ -213,7 +216,7 @@ const Operation = () => {
             <Form>
               <Grid container columnSpacing={10}>
                 <Grid item sm={12} md={6} lg={6}>
-                  <Box marginBottom={"25px"}>
+                  <Box marginBottom={"25px"} width={"100%"}>
                     <LocalizationProvider dateAdapter={AdapterDayjs}>
                       <DatePicker
                         label="Başlanğıc tarix"
